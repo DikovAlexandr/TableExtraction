@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="633c7208-7a23-4d63-8497-cfcf1c1c875d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TableExtraction.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/TableExtraction.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
