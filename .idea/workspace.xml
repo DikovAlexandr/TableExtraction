@@ -3,29 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="633c7208-7a23-4d63-8497-cfcf1c1c875d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset_generator.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset_generator.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TableExtraction.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/TableExtraction.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_0.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_0.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_0.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_1.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_2.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_3.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_3.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_4.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_4.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_5.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_5.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_5.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_6.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_6.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_6.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_7.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_7.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_7.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_7.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_8.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_8.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_8.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_9.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_9.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/sample_table_9.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eye.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/table.csv" beforeDir="false" afterPath="$PROJECT_DIR$/table.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
