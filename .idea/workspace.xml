@@ -5,7 +5,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TableExtraction.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/TableExtraction.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/draft/TableExtraction_draft.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/draft/TableExtraction_draft.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/table.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/draft/gray_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/draft/gray_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/draft/image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/draft/image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/draft/image_boxes.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/draft/image_boxes.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/draft/morph_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/draft/threshold_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/draft/threshold_image_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/table_0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/result/table_0.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/table_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/result/table_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/table_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/table_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/result/table_3.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
