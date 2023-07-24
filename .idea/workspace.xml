@@ -4,14 +4,7 @@
     <list default="true" id="633c7208-7a23-4d63-8497-cfcf1c1c875d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/draft/Debag.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/draft/Debag.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/gray_image.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/image_boxes.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/in_context.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/morph_image.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/test1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/draft/threshold_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/draft/image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/draft/image.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
