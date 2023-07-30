@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="633c7208-7a23-4d63-8497-cfcf1c1c875d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_0.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_3.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_4.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_5.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_6.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_6.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_7.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_7.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_8.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_8.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_9.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/sample_table_9.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mask_rcnn/train.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mask_rcnn/train.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/table_0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/table_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/table_3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/result/table_4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.pdf" beforeDir="false" />
-    </list>
+    <list default="true" id="633c7208-7a23-4d63-8497-cfcf1c1c875d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
