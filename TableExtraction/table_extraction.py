@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 from wand.image import Image
 import matplotlib.pyplot as plt
+from scipy.spatial import KDTree
 from predict import predict, visualize
 from pdf2image import convert_from_path
 
@@ -164,6 +165,7 @@ class TableExtraction:
                 if score >= 0.5:
                     y1, x1, y2, x2 = bbox
                     croped_image = image[y1:y2, x1:x2]
+                    # copy_image = croped_image.copy()
                     croped_gray_image = cv2.cvtColor(croped_image, cv2.COLOR_BGR2GRAY)
                     height, width = croped_gray_image.shape
 
@@ -172,15 +174,16 @@ class TableExtraction:
                     box_lines = boxes.strip().split('\n')
                     boxes_list = [line.split() for line in box_lines]
                     borders = []
-                    epsilon = (height + width) * 0.02
+                    epsilon = (height + width) * 0.05
 
                     # Check if there are lines on the croped image
                     if boxes_list[0] != []:
                         for box in boxes_list:
-                            if box[0] == '~' and ((abs(int(box[1]) - int(box[3])) <= epsilon) or (abs(int(box[2]) - int(box[4])) <= epsilon)):
+                            if box[0] == '~': # and ((abs(int(box[1]) - int(box[3])) <= epsilon) or (abs(int(box[2]) - int(box[4])) <= epsilon))
                                 x1, y1, x2, y2 = int(box[1]), int(box[2]), int(box[3]), int(box[4])
                                 borders.append([x1, y1, x2, y2])
-                    
+                                # cv2.rectangle(copy_image, (x1, height - y1), (x2, height - y2), (0, 255, 0), 1)
+
                     y1, x1, y2, x2 = bbox * int(self.high_dpi/self.low_dpi)
                     self.tables_bboxes.append((x1, y1, x2, y2))
                     croped_gray_image = self.gray_images[num][y1:y2, x1:x2]
@@ -205,7 +208,7 @@ class TableExtraction:
             boxes_list = [line.split() for line in box_lines]
             
             # Tolerance parameters at which we consider that the lines are even and intersect
-            epsilon = (height + width) * 0.02
+            epsilon = (height + width) * 0.1
 
             # Finding all vertical and horizontal lines of a table
             vertical_lines = []
@@ -215,8 +218,6 @@ class TableExtraction:
                     vertical_lines.append((int((x1 + x2) / 2), y1, int((x1 + x2) / 2), y2))
                 elif abs(y1 - y2) < epsilon:  # Horizontal lines
                     horizontal_lines.append((x1, int((y1 + y2) / 2), x2, int((y1 + y2) / 2)))
-                else:
-                    print(x1, y1, x2, y2)
 
             # Save lines for visualisation
             tables_lines.append((vertical_lines, horizontal_lines))
@@ -278,39 +279,28 @@ class TableExtraction:
                     table_nodes.append((width, 0))
 
             # Create a copy of the table_nodes list for modification
-            modified_table_nodes = table_nodes.copy()
-            f = True
-            while f:
-                for i, node in enumerate(modified_table_nodes):
-                    if i == len(modified_table_nodes) - 1 or len(modified_table_nodes) == 0:
-                        f = False
-                    else:
-                        x, y = node
-                        count = 1
-                        indices = []
-                        avg_x, avg_y = x, y                      
-                        for j, other_node in enumerate(modified_table_nodes):
-                            if j > i:  # Ignore the current point
-                                other_x, other_y = other_node
+            modified_table_nodes = np.array(table_nodes.copy())
 
-                                # Checking if another point is in the epsilon neighborhood
-                                if abs(other_x - x) <= epsilon and abs(other_y - y) <= epsilon:
-                                    avg_x += other_x
-                                    avg_y += other_y
-                                    count += 1
-                                    indices.append(j)
+            kdtree = KDTree(modified_table_nodes)
+            
+            neighborhood_nodes = []
+            visited = set()
 
-                        # If points are found in the neighborhood, replace the current point with the average value
-                        if count > 1:
-                            avg_x /= count
-                            avg_y /= count
-                            modified_table_nodes[i] = (int(avg_x), int(avg_y))
+            for node in modified_table_nodes:
+                if tuple(node) in visited:
+                    continue
 
-                        for item in sorted(indices, reverse=True):
-                            modified_table_nodes.pop(item)
+                idxs = kdtree.query_ball_point(node, epsilon)
+                visited.update(tuple(modified_table_nodes[i]) for i in idxs)
+
+                if len(idxs) > 1:
+                    mean_node = np.round(np.mean(modified_table_nodes[idxs], axis=0)).astype(int)
+                    neighborhood_nodes.append(tuple(mean_node))
+                else:
+                    neighborhood_nodes.append(tuple(node))
 
             # Sort nodes by x and y axis
-            nodes_sorted_x = sorted(modified_table_nodes, key=lambda x: x[0])
+            nodes_sorted_x = sorted(neighborhood_nodes, key=lambda x: x[0])
 
             for i in range(len(nodes_sorted_x)-1):
                 if abs(nodes_sorted_x[i][0] - nodes_sorted_x[i+1][0]) <= epsilon:
