@@ -34,6 +34,7 @@ fastjsonschema==2.18.0
 fonttools==4.38.0
 gast==0.3.3
 ghostscript==0.7
+git+https://github.com/ahmedfgad/Mask-RCNN-TF2
 google-auth==1.35.0
 google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
