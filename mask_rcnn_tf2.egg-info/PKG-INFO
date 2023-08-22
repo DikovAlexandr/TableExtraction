@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: mask-rcnn-tf2
+Version: 1.0
+Summary: Object Detecting using Mask R-CNN in TensorFlow 2.0
+Home-page: https://github.com/ahmedfgad/Mask-RCNN-TF2
+Author: Ahmed Fawzy Gad
+Author-email: ahmed.f.gad@gmail.com
+License: MIT
+Keywords: image instance region segmentation object detection Mask-RCNN Mask RCNN R-CNN TensorFlow 2.0 Keras
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Image Recognition
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: Topic :: Scientific/Engineering :: Image Segmentation
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.4
+License-File: LICENSE
+
+This is a modified version of this project (https://github.com/matterport/Mask_RCNN) so that the Mask R-CNN model works on TensorFlow 2.0. 

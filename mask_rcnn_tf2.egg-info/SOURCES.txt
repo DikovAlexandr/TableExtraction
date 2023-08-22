@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.md
+requirements.txt
+setup.cfg
+setup.py
+mask_rcnn_tf2.egg-info/PKG-INFO
+mask_rcnn_tf2.egg-info/SOURCES.txt
+mask_rcnn_tf2.egg-info/dependency_links.txt
+mask_rcnn_tf2.egg-info/top_level.txt
+mrcnn/__init__.py
+mrcnn/config.py
+mrcnn/model.py
+mrcnn/model_temp.py
+mrcnn/parallel_model.py
+mrcnn/utils.py
+mrcnn/visualize.py
