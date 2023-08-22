@@ -12,7 +12,6 @@ beautifulsoup4==4.12.2
 bleach==6.0.0
 cachetools==4.2.4
 camelot-py==0.11.0
-certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
 cffi==1.15.1
 chardet==5.1.0
 charset-normalizer==3.2.0
@@ -34,7 +33,6 @@ fastjsonschema==2.18.0
 fonttools==4.38.0
 gast==0.3.3
 ghostscript==0.7
-git+https://github.com/ahmedfgad/Mask-RCNN-TF2
 google-auth==1.35.0
 google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
