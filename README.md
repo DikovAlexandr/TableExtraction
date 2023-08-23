@@ -84,11 +84,14 @@ https://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick_on-win
    conda create --name table_extraction python=3.7
    conda activate table_extraction
    ```
-3. Install the required dependencies from the requirements.txt file, including the Mask R-CNN library
+3. Install the required dependencies from the requirements.txt file:
    ```bash
    pip3 install -r requirements.txt
    ```
-   Please note that another repository "Mask-RCNN-TF2" should be cloned as a result
+4. Download model weights: **https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5?rlkey=0k4qp26cq4aviy3xk20512ji0&dl=0**
+5. For correct operation of mrcnn with tensorflow2, replace the files model.py and utils.py in the mrcnn folder in your environment. To do this, use the files [model.py](mrcnn_fix/model.py) and [utils.py](mrcnn_fix/utils.py)
+from folder [mrcnn_fix](mrcnn_fix) and replace them with the files of the same name located at the address that looks like: **C:\Users\User\conda\envs\table_extraction\Lib\site-packages\mrcnn**
+
 
 ### Contributing
 
