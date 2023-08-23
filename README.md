@@ -82,17 +82,26 @@ https://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick_on-win
 2. Create a virtual environment (recommended) to isolate project dependencies
    ```bash
    conda create --name table_extraction python=3.7
+   ```
+   ```bash
    conda activate table_extraction
    ```
-3. Install the required dependencies from the requirements.txt file:
+3. Install the required dependencies from the requirements.txt file and setup.py:
    ```bash
    pip3 install -r requirements.txt
+   ```
+   ```bash
+   python3 setup.py install
    ```
 4. Download model weights: **https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5?rlkey=0k4qp26cq4aviy3xk20512ji0&dl=0**
 5. For correct operation of mrcnn with tensorflow2, replace the files model.py and utils.py in the mrcnn folder in your environment. To do this, use the files [model.py](mrcnn_fix/model.py) and [utils.py](mrcnn_fix/utils.py)
 from folder [mrcnn_fix](mrcnn_fix) and replace them with the files of the same name located at the address that looks like: **C:\Users\User\conda\envs\table_extraction\Lib\site-packages\mrcnn**
-
-
+6. You need to install a poppler
+Link to the version I used: **https://github.com/oschwartz10612/poppler-windows/releases/**
+You need to download the zip file and unpack it into the **Program Files** folder to get the address:
+**C:\Program Files\poppler-23.07.0**
+7. You also need to install Tesseract OCR with the **Russian** language pack.
+There is an installation guide with links to files: **https://codetoprosper.com/tesseract-ocr-for-windows**
 ### Contributing
 
 If you have any ideas, bug reports, or feature requests, feel free to open an issue or submit a pull request on the project's repository.
