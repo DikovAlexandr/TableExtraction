@@ -1,10 +1,10 @@
 ## Table Detection and Recognition
 
-This project aims to develop an end-to-end solution for table detection and recognition in documents and images. The primary goal is to build a system that can automatically detect tables within documents, extract the tabular data, and recognize the contents of the tables using optical character recognition (OCR) techniques.
+This project aims to develop an end-to-end solution for table detection and recognition in documents and images. The primary goal is to build a system that can automatically detect tables within documents, extract the tabular data and recognize the contents of the tables using optical character recognition (OCR) techniques.
 
 ## Technologies and Methods
 
-The project utilizes a combination of computer vision, deep learning, and natural language processing techniques to achieve table detection and recognition. The following technologies and methods are employed:
+The project utilizes a combination of computer vision, deep learning and natural language processing techniques to achieve table detection and recognition. The following technologies and methods are employed:
 
 1. **OpenCV**: OpenCV is used for image preprocessing and contour detection to identify potential table regions within documents.
 
@@ -24,15 +24,15 @@ The project follows a modular architecture to enable easy extensibility and main
 
 3. **Data Post-Processing**: The extracted tabular data is processed with NumPy and Pandas to organize and present it in a structured format. such as yaml and json.
 
-4. **User Interface**: A simple user interface is provided for interacting with the system, allowing users to upload documents and visualize the detected tables along with recognized text. For more customizable code interaction, recommend using TableExtraction.ipynb
+4. **User Interface**: A simple user interface is provided for interacting with the system, allowing users to upload documents and visualize the detected tables along with recognized text. TableExtraction.ipynb is recommend for more customizable code interaction.
 
 
 # Step by Step Detection
-To help with debugging and understanding the model, there are notebook 
+To help with debugging and understanding the model, there is notebook 
 ([TableExtraction.ipynb](TableExtraction/TableExtraction.ipynb)), which provide many visualizations and allow you to step through the model to check the output at each point, change settings and see possible code errors that occur. Here are some examples:
 
 ## 1. File selection
-First, select the PDF file from which you want to extract tabular information. Specify its address in the code:
+First, select the PDF file which you want to extract tabular information from. Specify its address in the code:
 ```python
 extractor.extract_from_file('PUT/YOUR/FILE/ADDRESS/HERE.pdf')
 ```
@@ -54,13 +54,13 @@ After finding the lines, you need to understand how the cells are located relati
 ![](assets/nodes.png)
 
 ## 5. Cell division
-Next, the cells are divided into those that store the names of the columns, and those that store the data.
+Next, the cells are divided into those that store the names of the columns and data-storing cells.
 
 ![](assets/header.png)
 ![](assets/records.png)
 
 ## 6. Result
-As a result of the algorithm, a file with the yaml extension will appear in the resilts folder, in which the structured data of each of the pages of the document will be stored
+As a result of the algorithm, a file with the yaml extension will appear in the results folder, in which the structured data of each of the pages of the document will be stored
 
 ## Installation
 
