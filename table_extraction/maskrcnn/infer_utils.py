@@ -2,7 +2,9 @@ import cv2
 import numpy as np
 import torch
 
-from class_names import INSTANCE_CATEGORY_NAMES as coco_names
+from . import class_names
+coco_names = class_names.INSTANCE_CATEGORY_NAMES
+# from class_names import INSTANCE_CATEGORY_NAMES as coco_names
 
 np.random.seed(2023)
 

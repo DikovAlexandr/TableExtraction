@@ -1,17 +1,16 @@
 import torch
 import torchvision
-import cv2
-import argparse
 import numpy as np
 import torch.nn as nn
-import os
 
 from PIL import Image
-from infer_utils import draw_segmentation_map, get_outputs
+from . import infer_utils
+# from infer_utils import get_outputs
 from torchvision.transforms import transforms as transforms
-from class_names import INSTANCE_CATEGORY_NAMES as class_names
+from .class_names import INSTANCE_CATEGORY_NAMES as class_names
+# from class_names import INSTANCE_CATEGORY_NAMES as class_names
 
-def get_bboxes_of_objects(input, weights, threshold):
+def get_bboxes_of_objects(image, weights, threshold):
     # Initialize the model
     model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(
         pretrained=False, num_classes=91
@@ -37,7 +36,6 @@ def get_bboxes_of_objects(input, weights, threshold):
         transforms.ToTensor()
     ])
 
-    image = Image.open(input)
     # Keep a copy of the original image for OpenCV functions and applying masks
     orig_image = image.copy()
 
@@ -46,6 +44,6 @@ def get_bboxes_of_objects(input, weights, threshold):
     # Add a batch dimension
     image = image.unsqueeze(0).to(device)
 
-    masks, boxes, labels = get_outputs(image, model, threshold)
+    masks, boxes, labels = infer_utils.get_outputs(image, model, threshold)
 
-    return boxes, labels
+    return masks, boxes, labels
