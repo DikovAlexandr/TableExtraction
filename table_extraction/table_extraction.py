@@ -13,6 +13,8 @@ from wand.image import Image
 import matplotlib.pyplot as plt
 from scipy.spatial import KDTree
 from predict import predict, visualize
+from mask-rcnn.inference import get_bboxes_of_objects
+
 from pdf2image import convert_from_path
 
 class TableExtraction:

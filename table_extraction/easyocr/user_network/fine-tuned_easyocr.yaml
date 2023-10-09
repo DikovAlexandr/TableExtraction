@@ -1,0 +1,9 @@
+network_params:
+  input_channel: 1
+  output_channel: 256
+  hidden_size: 256
+imgH: 64
+imgW: 600
+lang_list:
+         - 'ru'
+character_list: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяЂђЃѓЄєІіЇїЈјЉљЊњЋћЌќЎўЏџҐґҒғҚқҮүҲҳҶҷӀӏӢӣӨөӮӯ

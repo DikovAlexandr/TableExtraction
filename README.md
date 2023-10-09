@@ -62,7 +62,7 @@ Next, the cells are divided into those that store the names of the columns and d
 ## 6. Result
 As a result of the algorithm, a file with the yaml extension will appear in the results folder, in which the structured data of each of the pages of the document will be stored
 
-## Installation
+## Installation (Are not up to date!)
 
 <!-- Отдельно склонировать репозиторий mask rcnn
 проблема с numpy
@@ -76,7 +76,7 @@ pip3 install -r requirements.txt --user
 https://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick_on-windows -->
 
 1. Clone this repository
-    ```bash
+   ```bash
    git clone https://github.com/DikovAlexandr/TableExtraction
    ```
 2. Create a virtual environment (recommended) to isolate project dependencies

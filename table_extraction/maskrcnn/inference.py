@@ -7,14 +7,19 @@ from PIL import Image
 from . import infer_utils
 # from infer_utils import get_outputs
 from torchvision.transforms import transforms as transforms
-from .class_names import INSTANCE_CATEGORY_NAMES as class_names
+from .class_names import INSTANCE_CATEGORY_NAMES, CELLS_CATEGORY_NAMES
 # from class_names import INSTANCE_CATEGORY_NAMES as class_names
 
-def get_bboxes_of_objects(image, weights, threshold):
+def get_bboxes_of_objects(image, weights, threshold, mode):
     # Initialize the model
     model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(
         pretrained=False, num_classes=91
     )
+
+    if mode == 'cells':
+        class_names = CELLS_CATEGORY_NAMES
+    else:
+        class_names = INSTANCE_CATEGORY_NAMES
 
     model.roi_heads.box_predictor.cls_score = nn.Linear(in_features=1024, out_features=len(class_names), bias=True)
     model.roi_heads.box_predictor.bbox_pred = nn.Linear(in_features=1024, out_features=len(class_names)*4, bias=True)
@@ -44,6 +49,6 @@ def get_bboxes_of_objects(image, weights, threshold):
     # Add a batch dimension
     image = image.unsqueeze(0).to(device)
 
-    masks, boxes, labels = infer_utils.get_outputs(image, model, threshold)
+    masks, boxes, labels = infer_utils.get_outputs(image, model, threshold, mode)
 
     return masks, boxes, labels

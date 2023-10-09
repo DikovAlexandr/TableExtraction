@@ -1,0 +1,38 @@
+Epoch: [19]  [0/8]  eta: 0:00:36  lr: 0.000500  loss: 0.5685 (0.5685)  loss_classifier: 0.1031 (0.1031)  loss_box_reg: 0.1420 (0.1420)  loss_mask: 0.1350 (0.1350)  loss_objectness: 0.0361 (0.0361)  loss_rpn_box_reg: 0.1524 (0.1524)  time: 4.5603  data: 3.4636  max mem: 5461
+Epoch: [19]  [7/8]  eta: 0:00:02  lr: 0.000500  loss: 0.7868 (0.8498)  loss_classifier: 0.1880 (0.1902)  loss_box_reg: 0.1984 (0.1987)  loss_mask: 0.1451 (0.1531)  loss_objectness: 0.0528 (0.0774)  loss_rpn_box_reg: 0.1878 (0.2304)  time: 2.4221  data: 1.5288  max mem: 5461
+Epoch: [19] Total time: 0:00:19 (2.4353 s / it)
+Test:  [0/9]  eta: 0:00:06  model_time: 0.4091 (0.4091)  evaluator_time: 0.1512 (0.1512)  time: 0.7768  data: 0.2154  max mem: 5461
+Test:  [8/9]  eta: 0:00:00  model_time: 0.1993 (0.2162)  evaluator_time: 0.1142 (0.1207)  time: 0.3678  data: 0.0280  max mem: 5461
+Test: Total time: 0:00:03 (0.3738 s / it)
+Averaged stats: model_time: 0.1993 (0.2162)  evaluator_time: 0.1142 (0.1207)
+Accumulating evaluation results...
+DONE (t=0.02s).
+Accumulating evaluation results...
+DONE (t=0.02s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.733
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.912
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.869
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.709
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.738
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.924
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.096
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.525
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.794
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.743
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.802
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.932
+IoU metric: segm
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.736
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.912
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.889
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.715
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.735
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.956
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.098
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.530
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.802
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.751
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.809
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.964
+Training time 0:08:42

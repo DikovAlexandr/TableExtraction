@@ -1,3 +1,4 @@
 *.h5
 *.pth
 /table_extraction/maskrcnn/input/dataset
+/table_extraction/input/cache

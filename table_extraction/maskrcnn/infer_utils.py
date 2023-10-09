@@ -3,15 +3,15 @@ import numpy as np
 import torch
 
 from . import class_names
-coco_names = class_names.INSTANCE_CATEGORY_NAMES
-# from class_names import INSTANCE_CATEGORY_NAMES as coco_names
 
 np.random.seed(2023)
 
-# This will help us create a different color for each class
-COLORS = np.random.uniform(0, 255, size=(len(coco_names), 3))
+def get_outputs(image, model, threshold, mode):
+    if mode == 'cells':
+        coco_names = class_names.CELLS_CATEGORY_NAMES
+    else:
+        coco_names = class_names.INSTANCE_CATEGORY_NAMES
 
-def get_outputs(image, model, threshold):
     with torch.no_grad():
         # Forward pass of the image through the model.
         outputs = model(image)
@@ -32,9 +32,18 @@ def get_outputs(image, model, threshold):
     boxes = boxes[:thresholded_preds_count]
     # Get the classes labels
     labels = [coco_names[i] for i in outputs[0]['labels']]
+    # Discard bounding boxes below threshold value
+    labels = labels[:thresholded_preds_count]
     return masks, boxes, labels    
 
-def draw_segmentation_map(image, masks, boxes, labels, args):
+def draw_segmentation_map(image, masks, boxes, labels, args, mode):
+    if mode == 'cells':
+        coco_names = class_names.CELLS_CATEGORY_NAMES
+    else:
+        coco_names = class_names.INSTANCE_CATEGORY_NAMES
+    # This will help us create a different color for each class
+    COLORS = np.random.uniform(0, 255, size=(len(coco_names), 3))
+
     alpha = 1.0
     beta = 1.0 # Transparency for the segmentation map
     gamma = 0.0 # Scalar added to each sum
