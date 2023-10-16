@@ -6,6 +6,7 @@ from typing import List, Tuple
 
 from builder import (
     split_into_headers_and_records,
+    split_into_headers_and_records_maskrcnn,
     visualize_headers_and_records_cells,
     create_cell_dict,
     build_structure,
@@ -35,23 +36,31 @@ def make_yaml_file(tables: List[np.ndarray],
     for num, image in enumerate(tables):
         structure = []
         if tables_rectangles[num]:
-            header_cells, record_cells, columns_for_records, records = split_into_headers_and_records(
-                tables_rectangles[num])
+            # header_cells, record_cells, columns_for_records, records = split_into_headers_and_records_maskrcnn(image, tables_rectangles[num])
+            header_cells, record_cells, columns_for_records, records = split_into_headers_and_records(tables_rectangles[num])
 
             if header_cells and record_cells:
-                # visualize_headers_and_records_cells(image, header_cells, type='header')
-                # visualize_headers_and_records_cells(image, record_cells, type='record')
+                # visualize_headers_and_records_cells(image, header_cells, 'header')
+                # visualize_headers_and_records_cells(image, record_cells, 'record')
 
-                header_cell_dict = create_cell_dict(
-                    image, header_cells)
+                header_cell_dict = create_cell_dict(header_cells)
                 rectangle_text_dict = ocr_detected_text[num]
 
                 for cell in header_cells:
-                    structure.append(build_structure(
-                        cell, rectangle_text_dict, header_cell_dict))
+                    structure.append(build_structure(cell, 
+                                                     rectangle_text_dict, 
+                                                     header_cell_dict))
+                    
+                # 
+                # print(structure)
+                # 
 
-                data_list = list(split_records(
-                    record_cells, columns_for_records))
+                data_list = list(split_records(record_cells, 
+                                               columns_for_records))
+                
+                # 
+                # print(data_list)
+                # 
 
                 for i in range(records):
                     fill_structure(

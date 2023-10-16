@@ -1,15 +1,17 @@
+import os
 import cv2
 import numpy as np
 from typing import List, Tuple, Dict
 import matplotlib.pyplot as plt
 
-def split_into_headers_and_records(rectangles: List[Tuple[Tuple[int, int], 
-                Tuple[int, int]]]) -> Tuple[List[Tuple[Tuple[int, int], Tuple[int, int]]], List[Tuple[Tuple[int, int], Tuple[int, int]]], int, int]:
+from maskrcnn import inference
+
+def split_into_headers_and_records(rectangles: List[Tuple[int, int, int, int]]) -> Tuple[List[Tuple[int, int, int, int]], List[Tuple[int, int, int, int]], int, int]:
     """
     Splits a list of rectangles into headers and records based on the number of cells per row.
 
     Args:
-        rectangles (List[Tuple[Tuple[int, int], Tuple[int, int]]]): A list of rectangles, where each rectangle is
+        rectangles (List[Tuple[int, int, int, int]]): A list of rectangles, where each rectangle is
         represented as a tuple of two points (top-left and bottom-right corners).
 
     Returns:
@@ -21,7 +23,7 @@ def split_into_headers_and_records(rectangles: List[Tuple[Tuple[int, int],
     """
     cell_counts = {}  # Dictionary to store cell counts for each y
 
-    for _, y1, _ in rectangles:
+    for _, y1, _, _ in rectangles:
         if y1 in cell_counts:
             cell_counts[y1] += 1
         else:
@@ -42,10 +44,99 @@ def split_into_headers_and_records(rectangles: List[Tuple[Tuple[int, int],
         else:
             records += 1
 
-    record_cells = [((x1, y1), (x2, y2))
-                    for (x1, y1), (x2, y2) in rectangles if y1 < change_y]
-    header_cells = [((x1, y1), (x2, y2))
-                    for (x1, y1), (x2, y2) in rectangles if y1 >= change_y]
+    record_cells = [(x1, y1, x2, y2)
+                    for x1, y1, x2, y2 in rectangles if y1 < change_y]
+    header_cells = [(x1, y1, x2, y2)
+                    for x1, y1, x2, y2 in rectangles if y1 >= change_y]
+
+    return header_cells, record_cells, num_cells, records
+
+def split_into_headers_and_records_maskrcnn(table: np.ndarray,
+                                            rectangles: List[Tuple[int, int, int, int]]) -> (Tuple[List[Tuple[int, int, int, int]], 
+                                                                   List[Tuple[int, int, int, int]], int, int]):
+    """
+    Splits a list of rectangles into headers and records based on the number of cells per row using maskrcnn.
+
+    Args:
+        rectangles (List[Tuple[int, int, int, int]]): A list of rectangles, where each rectangle is
+        represented as a tuple of two points (top-left and bottom-right corners).
+
+    Returns:
+        Tuple[List[Tuple[int, int, int, int]], List[Tuple[int, int, int, int]], int, int]:
+        - List of header rectangles, where each rectangle represents the header row.
+        - List of record rectangles, where each rectangle represents a record row.
+        - Number of cells per row (num_cells).
+        - Total number of record rows (records).
+    """
+    copy_image = table.copy()
+    header_cells = []
+    record_cells = []
+
+    # Get prediction
+    mode = "cells"
+    weights = os.path.join(os.getcwd(), "maskrcnn", "weights", "cell_classification.pth")
+    _, boxes, labels = inference.get_bboxes_of_objects(table, weights, threshold=0.5, mode=mode)
+
+    head_bbox = None
+    record_bbox = None
+
+    for box, label in zip(boxes, labels):
+        [x1, y1], [x2, y2] = box
+        if label == "head":
+            if abs(x1 - x2)*abs(y1 - y2) >= max_head_area:
+                head_bbox = (x1, y1, x2, y2)
+                max_head_area = abs(x1 - x2)*abs(y1 - y2)
+        elif label == "cell":
+            if abs(x1 - x2)*abs(y1 - y2) >= max_record_area:
+                record_bbox = (x1, y1, x2, y2)
+                max_record_area = abs(x1 - x2)*abs(y1 - y2)
+
+    if head_bbox:
+        min_x_head, min_y_head, max_x_head, max_y_head = head_bbox
+        # cv2.rectangle(copy_image, (min_x_head, min_y_head), (max_x_head, max_y_head), (0, 255, 0), 4)
+
+    if record_bbox:
+        min_x_record, min_y_record, max_x_record, max_y_record = record_bbox
+        # cv2.rectangle(copy_image, (min_x_record, min_y_record), (max_x_record, max_y_record), (255, 0, 0), 4)
+    
+    # plt.imshow(copy_image)
+    # plt.axis('off')
+    # plt.show()
+
+    for rectangle in rectangles:
+        x1, y1, x2, y2 = rectangle
+
+        center_x = (x1 + x2) // 2
+        center_y = (y1 + y2) // 2
+
+        if min_x_head <= center_x <= max_x_head and min_y_head <= center_y <= max_y_head:
+            header_cells.append(rectangle)
+        elif min_x_record <= center_x <= max_x_record and min_y_record <= center_y <= max_y_record:
+            record_cells.append(rectangle)
+
+    record_rows = []
+    current_row = []
+    prev_center_y = None
+    epsilon = (table.shape[0] + table.shape[1])/ (2*40)
+
+    for rectangle in record_cells:
+        x1, y1, x2, y2 = rectangle
+        center_x = (x1 + x2) // 2
+        center_y = (y1 + y2) // 2
+
+        if prev_center_y is None or abs(center_y - prev_center_y) <= epsilon:
+            current_row.append(rectangle)
+        else:
+            record_rows.append(current_row)
+            current_row = [rectangle]
+
+        prev_center_y = center_y
+
+    if current_row:
+        record_rows.append(current_row)
+
+    records = len(record_rows)
+    num_cells = len(record_rows[0])
 
     return header_cells, record_cells, num_cells, records
 
@@ -69,7 +160,7 @@ def visualize_headers_and_records_cells(image: np.ndarray, cells: List[Tuple[Tup
     copy_image = image.copy()
     copy_image = cv2.cvtColor(copy_image, cv2.COLOR_BGR2RGB)
     for cell in cells:
-        (x1, y1), (x2, y2) = cell
+        x1, y1, x2, y2 = cell
         cv2.rectangle(copy_image, (x1, y1),
                         (x2, y2), color, 10)
 
@@ -153,6 +244,8 @@ def build_structure(cell: Tuple[int, int, int, int],
         dict: A hierarchical structure of cells represented as a dictionary.
     """
     text = rectangle_text_dict.get(cell, None)
+    # print(text)
+
     node = {
         text: []
     }

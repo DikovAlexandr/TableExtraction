@@ -1,0 +1,203 @@
+2023-10-15 17:37:22,262 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 17:37:22,262 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 17:37:22,277 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 17:37:25,885 - WARNING -  * Debugger is active!
+2023-10-15 17:37:25,893 - INFO -  * Debugger PIN: 612-318-979
+2023-10-15 17:39:18,761 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 17:39:18,761 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 17:39:18,771 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 17:39:22,168 - WARNING -  * Debugger is active!
+2023-10-15 17:39:22,173 - INFO -  * Debugger PIN: 612-318-979
+2023-10-15 17:39:46,911 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\pip\\_vendor\\pyparsing\\core.py', reloading
+2023-10-15 17:39:46,985 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\pip\\_vendor\\packaging\\markers.py', reloading
+2023-10-15 17:39:48,972 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 17:39:54,142 - WARNING -  * Debugger is active!
+2023-10-15 17:39:54,150 - INFO -  * Debugger PIN: 612-318-979
+2023-10-15 17:56:03,947 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 17:56:03,947 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 17:56:03,961 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 17:56:07,869 - WARNING -  * Debugger is active!
+2023-10-15 17:56:07,874 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 17:58:19,522 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 17:58:19,522 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 17:58:19,531 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 17:58:23,145 - WARNING -  * Debugger is active!
+2023-10-15 17:58:23,149 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 17:58:52,262 - INFO -  * Detected change in 'C:\\Users\\dsash\\anaconda3\\Lib\\site-packages\\IPython\\display.py', reloading
+2023-10-15 17:58:52,337 - INFO -  * Detected change in 'C:\\Users\\dsash\\anaconda3\\Lib\\site-packages\\IPython\\core\\display_functions.py', reloading
+2023-10-15 17:58:52,348 - INFO -  * Detected change in 'C:\\Users\\dsash\\anaconda3\\Lib\\site-packages\\IPython\\lib\\display.py', reloading
+2023-10-15 17:58:53,672 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 17:58:58,120 - WARNING -  * Debugger is active!
+2023-10-15 17:58:58,125 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 17:59:46,829 - INFO -  * Detected change in 'C:\\Users\\dsash\\anaconda3\\Lib\\os.py', reloading
+2023-10-15 17:59:47,771 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 17:59:51,566 - WARNING -  * Debugger is active!
+2023-10-15 17:59:51,571 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 17:59:54,955 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 17:59:54,955 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 17:59:54,956 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 17:59:54,956 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 17:59:56,391 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:00:24,701 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 18:00:24,702 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 18:00:24,712 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:00:28,278 - WARNING -  * Debugger is active!
+2023-10-15 18:00:28,282 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:02:30,520 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 18:02:30,520 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 18:02:30,530 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:02:34,226 - WARNING -  * Debugger is active!
+2023-10-15 18:02:34,230 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:02:41,476 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 18:02:41,476 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 18:02:41,477 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 18:02:41,477 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\app.py', reloading
+2023-10-15 18:02:42,263 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:02:57,804 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:05:58,362 - WARNING -  * Debugger is active!
+2023-10-15 18:05:58,366 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:06:05,273 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 18:06:05,273 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 18:06:05,281 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:06:08,947 - WARNING -  * Debugger is active!
+2023-10-15 18:06:08,952 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:14:45,027 - INFO -  * Detected change in 'C:\\Users\\dsash\\anaconda3\\Lib\\json\\__init__.py', reloading
+2023-10-15 18:14:45,657 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:14:49,374 - WARNING -  * Debugger is active!
+2023-10-15 18:14:49,379 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:32:01,223 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 18:32:01,223 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 18:32:01,234 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:32:05,140 - WARNING -  * Debugger is active!
+2023-10-15 18:32:05,144 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:33:59,052 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\__init__.py', reloading
+2023-10-15 18:33:59,052 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\__init__.py', reloading
+2023-10-15 18:33:59,803 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:34:03,561 - WARNING -  * Debugger is active!
+2023-10-15 18:34:03,564 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:34:06,430 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\__init__.py', reloading
+2023-10-15 18:34:06,431 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\__init__.py', reloading
+2023-10-15 18:34:06,477 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\numeric.py', reloading
+2023-10-15 18:34:06,477 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\numeric.py', reloading
+2023-10-15 18:34:06,501 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\umath.py', reloading
+2023-10-15 18:34:06,502 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\umath.py', reloading
+2023-10-15 18:34:06,599 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\fromnumeric.py', reloading
+2023-10-15 18:34:06,599 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\fromnumeric.py', reloading
+2023-10-15 18:34:06,630 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\memmap.py', reloading
+2023-10-15 18:34:06,631 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\memmap.py', reloading
+2023-10-15 18:34:06,647 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\function_base.py', reloading
+2023-10-15 18:34:06,647 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\function_base.py', reloading
+2023-10-15 18:34:06,663 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\getlimits.py', reloading
+2023-10-15 18:34:06,664 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\getlimits.py', reloading
+2023-10-15 18:34:06,682 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\shape_base.py', reloading
+2023-10-15 18:34:06,683 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\shape_base.py', reloading
+2023-10-15 18:34:06,702 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\einsumfunc.py', reloading
+2023-10-15 18:34:06,702 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\core\\einsumfunc.py', reloading
+2023-10-15 18:34:06,721 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\__init__.py', reloading
+2023-10-15 18:34:06,722 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\__init__.py', reloading
+2023-10-15 18:34:06,776 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\type_check.py', reloading
+2023-10-15 18:34:06,777 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\type_check.py', reloading
+2023-10-15 18:34:06,791 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\index_tricks.py', reloading
+2023-10-15 18:34:06,791 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\index_tricks.py', reloading
+2023-10-15 18:34:06,830 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\function_base.py', reloading
+2023-10-15 18:34:06,830 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\numpy\\lib\\function_base.py', reloading
+2023-10-15 18:34:07,389 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:34:11,166 - WARNING -  * Debugger is active!
+2023-10-15 18:34:11,170 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:34:36,061 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\pyclipper\\_version.py', reloading
+2023-10-15 18:34:36,062 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\pyclipper\\__init__.py', reloading
+2023-10-15 18:34:36,062 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\pyclipper\\_version.py', reloading
+2023-10-15 18:34:36,063 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\pyclipper\\__init__.py', reloading
+2023-10-15 18:34:37,678 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:34:41,475 - WARNING -  * Debugger is active!
+2023-10-15 18:34:41,479 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:34:49,410 - INFO -  * Detected change in 'C:\\Users\\dsash\\anaconda3\\Lib\\typing.py', reloading
+2023-10-15 18:34:49,957 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\maskrcnn\\infer_utils.py', reloading
+2023-10-15 18:34:50,756 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:34:55,041 - WARNING -  * Debugger is active!
+2023-10-15 18:34:55,045 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:35:02,348 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\recognition.py', reloading
+2023-10-15 18:35:02,348 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\recognition.py', reloading
+2023-10-15 18:35:02,349 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\recognition.py', reloading
+2023-10-15 18:35:02,349 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\recognition.py', reloading
+2023-10-15 18:35:03,173 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:35:44,853 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-10-15 18:35:44,853 - INFO - [33mPress CTRL+C to quit[0m
+2023-10-15 18:35:44,862 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:35:48,574 - WARNING -  * Debugger is active!
+2023-10-15 18:35:48,578 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:36:02,577 - INFO -  * Detected change in 'C:\\Users\\dsash\\anaconda3\\Lib\\logging\\__init__.py', reloading
+2023-10-15 18:36:04,186 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:36:07,894 - WARNING -  * Debugger is active!
+2023-10-15 18:36:07,898 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:36:18,637 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\config.py', reloading
+2023-10-15 18:36:18,638 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\handlers.py', reloading
+2023-10-15 18:36:18,639 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\__init__.py', reloading
+2023-10-15 18:36:18,639 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\config.py', reloading
+2023-10-15 18:36:18,639 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\handlers.py', reloading
+2023-10-15 18:36:18,639 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\__init__.py', reloading
+2023-10-15 18:36:18,639 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\__init__.py', reloading
+2023-10-15 18:36:18,640 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\__init__.py', reloading
+2023-10-15 18:36:18,640 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\__init__.py', reloading
+2023-10-15 18:36:18,640 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\__init__.py', reloading
+2023-10-15 18:36:18,640 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\config.py', reloading
+2023-10-15 18:36:18,640 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\config.py', reloading
+2023-10-15 18:36:18,641 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\config.py', reloading
+2023-10-15 18:36:18,641 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\handlers.py', reloading
+2023-10-15 18:36:18,641 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\config.py', reloading
+2023-10-15 18:36:18,641 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\handlers.py', reloading
+2023-10-15 18:36:18,642 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\handlers.py', reloading
+2023-10-15 18:36:18,642 - INFO -  * Detected change in 'C:\\Users\\dsash\\Repository\\TableExtraction\\.env\\Lib\\site-packages\\logging\\handlers.py', reloading
+2023-10-15 18:36:20,130 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:36:23,754 - WARNING -  * Debugger is active!
+2023-10-15 18:36:23,758 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:37:06,105 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:37:06,106 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:37:06,106 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:37:07,032 - INFO -  * Restarting with watchdog (windowsapi)
+2023-10-15 18:39:01,321 - WARNING -  * Debugger is active!
+2023-10-15 18:39:01,325 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:39:16,556 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:39:16,557 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:39:16,557 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:39:16,558 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:39:56,500 - WARNING -  * Debugger is active!
+2023-10-15 18:39:56,504 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:41:17,479 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:17,481 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:17,481 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:21,747 - WARNING -  * Debugger is active!
+2023-10-15 18:41:21,751 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:41:37,797 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:37,797 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:37,798 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:42,060 - WARNING -  * Debugger is active!
+2023-10-15 18:41:42,064 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:41:53,194 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:53,194 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:53,195 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:41:58,050 - WARNING -  * Debugger is active!
+2023-10-15 18:41:58,054 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:42:06,733 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:42:06,733 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:42:06,734 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:43:08,879 - WARNING -  * Debugger is active!
+2023-10-15 18:43:08,883 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:43:19,932 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:43:19,933 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:43:19,933 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:43:19,933 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:43:24,948 - WARNING -  * Debugger is active!
+2023-10-15 18:43:24,952 - INFO -  * Debugger PIN: 151-383-147
+2023-10-15 18:43:32,988 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:43:32,989 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading
+2023-10-15 18:43:32,989 - INFO -  * Detected change in 'c:\\Users\\dsash\\Repository\\TableExtraction\\table_extraction\\extractor.py', reloading

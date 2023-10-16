@@ -9,11 +9,11 @@ from scipy.spatial import KDTree
 
 from maskrcnn import inference
 
-logging.basicConfig(
-    filename='logs.log',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+# logging.basicConfig(
+#     filename='logs.log',
+#     level=logging.DEBUG,
+#     format='%(asctime)s - %(levelname)s - %(message)s'
+# )
 
 TESSERACT_CONFIG = r'--oem 1 --psm 1 -l rus'
 
@@ -41,19 +41,21 @@ def get_tables_maskrcnn(low_quality_gray_images: List[np.ndarray],
     for num, image in enumerate(low_quality_gray_images):
         # Get prediction
         mode = "table_plot"
-        weights = os.getcwd() + "\maskrcnn\weights\table_plot.pth"
+        directory = os.path.dirname(os.path.realpath(__file__))
+        weights = os.path.join(directory, "maskrcnn", "weights", "detect_table_plot.pth")
         _, boxes, labels = inference.get_bboxes_of_objects(image, weights, threshold = 0.8, mode=mode)
 
-        logging.debug(f"Image {num + 1} - Boxes: {boxes} [amount {len(boxes)}], Labels: {labels} [amount {len(labels)}]")
+        # logging.debug(f"Image {num + 1} - Boxes: {boxes} [amount {len(boxes)}], Labels: {labels} [amount {len(labels)}]")
         
         for box, label in zip(boxes, labels):
             if label == "table":
                 [x1, y1], [x2, y2] = box
-                croped_low_quality_gray_image = low_quality_gray_images[num][y1:y2, x1:x2]
+                croped_low_quality_gray_image = low_quality_gray_images[num][y1-5:y2+5, x1-5:x2+5]
                 tables_low.append(croped_low_quality_gray_image)
-                croped_high_quality_gray_image = high_quality_gray_images[num][y1:y2, x1:x2]
+                factor = int(high_dpi/low_dpi)
+                croped_high_quality_gray_image = high_quality_gray_images[num][y1*factor:y2*factor, x1*factor:x2*factor]
                 tables_high.append(croped_high_quality_gray_image)
-        return tables_high, tables_low
+    return tables_high, tables_low
     
 def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, int, int]]]:
     """
@@ -69,24 +71,40 @@ def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, in
 
     for num, image in enumerate(tables):
         cells = []
-        copy_image = image.copy()
+        # copy_image = image.copy()
 
         # Get prediction
         mode = "cells"
-        weights = os.getcwd() + "\maskrcnn\weights\cell_detection.pth"
-        _, boxes, labels = inference.get_bboxes_of_objects(copy_image, weights, threshold=0.8, mode=mode)
+        # weights = os.path.join(os.getcwd(), "maskrcnn", "weights", "cell_detection.pth")
+        directory = os.path.dirname(os.path.realpath(__file__))
+        weights = os.path.join(directory, "maskrcnn", "weights", "best_cell_detection.pth")
+        _, boxes, labels = inference.get_bboxes_of_objects(image, weights, threshold=0.6, mode=mode)
 
-        logging.debug(f"Image {num + 1} - Boxes: {boxes} [amount {len(boxes)}], Labels: {labels} [amount {len(labels)}]")
+        # logging.debug(f"Image {num + 1} - Boxes: {boxes} [amount {len(boxes)}], Labels: {labels} [amount {len(labels)}]")
 
         for box, _ in zip(boxes, labels):
             [x1, y1], [x2, y2] = box
             cells.append((x1, y1, x2, y2))
 
-            cv2.rectangle(copy_image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+            # cv2.rectangle(copy_image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
 
-        plt.imshow(cv2.cvtColor(copy_image, cv2.COLOR_BGR2RGB))
-        plt.axis('off')
-        plt.show()
+        # plt.imshow(cv2.cvtColor(copy_image, cv2.COLOR_BGR2RGB))
+        # plt.axis('off')
+        # plt.show()
+
+        # 
+        aligned_cells = []
+        epsilon = (image.shape[0] + image.shape[1]) / (2*30)
+
+        for cell in cells:
+            x1, y1, x2, y2 = cell
+            aligned_x1 = int(round(x1 / epsilon) * epsilon)
+            aligned_y1 = int(round(y1 / epsilon) * epsilon)
+            aligned_x2 = int(round(x2 / epsilon) * epsilon)
+            aligned_y2 = int(round(y2 / epsilon) * epsilon)
+
+            aligned_cells.append((aligned_x1, aligned_y1, aligned_x2, aligned_y2))
+        #
         
         all_cells.append(cells)
     return(all_cells)
@@ -123,9 +141,9 @@ def get_lines_Hough(tables: List[np.ndarray]) -> List[Tuple[List[Tuple[int, int,
 
     # Extract vertical and horizontal lines in an image using a kernel transform
     for num, image in enumerate(tables):
+        copy_image = image.copy()
         height, width = image.shape
-        _, threshold_image = cv2.threshold(
-            image, 127, 255, cv2.THRESH_BINARY)
+        _, threshold_image = cv2.threshold(copy_image, 127, 255, cv2.THRESH_BINARY)
         inverted_image = cv2.bitwise_not(threshold_image)
 
         # Horizontal
@@ -411,8 +429,9 @@ def get_rectangles(tables: List[np.ndarray],
                             rectangles.append(rectangle)
                             flag = False
                             break
-
-        rectangles = sorted(rectangles, key=lambda x: (- x[0][1], x[0][0]))
+        
+        rectangles = [(x1, height-y1, x2, height-y2) for x1, y1, x2, y2 in rectangles]
+        rectangles = sorted(rectangles, key=lambda x: (x[1], x[0]))
         tables_rectangles.append(rectangles)
     return tables_rectangles
 

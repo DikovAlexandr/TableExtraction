@@ -3,7 +3,24 @@ import cv2
 import numpy as np
 from typing import List, Tuple
 import matplotlib.pyplot as plt
-from pdf2image import convert_from_path
+from pdf2image import convert_from_path, convert_from_bytes 
+
+def bytes_file_to_array(pdf_bytes: bytes, dpi: int = 300) -> List[np.ndarray]:
+    """
+    Converts a PDF file to a list of NumPy arrays representing images.
+
+    Args:
+        pdf_bytes (bytes): The PDF content in bytes.
+        dpi (int, optional): Dots per inch for image conversion. Defaults to 300.
+
+    Returns:
+        List[np.ndarray]: A list of NumPy arrays representing images.
+    """
+    poppler_path = os.path.join(os.environ.get(
+        'PROGRAMFILES', 'C:\\Program Files'), 'poppler-23.07.0', 'Library', 'bin')
+    images = convert_from_bytes(
+        pdf_bytes, dpi=dpi, poppler_path=poppler_path)
+    return [np.array(image) for image in images]
 
 def pdf_file_to_array(file_path: str, dpi: int = 300) -> List[np.ndarray]:
     """

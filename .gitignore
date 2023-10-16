@@ -1,4 +1,5 @@
 *.h5
 *.pth
+/venv
 /table_extraction/maskrcnn/input/dataset
 /table_extraction/input/cache
