@@ -109,21 +109,21 @@ Now you can get started, follow these steps:
    - Full Precision Weights:
 
    ```bach
-   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O detect_table_plot.pth
+   wget https://www.dropbox.com/scl/fi/loj552c7bllqsc5kwwffi/detect_table_plot.pth?rlkey=py4nqzrylmbtburmwf5m8814b&dl=0 -O detect_table_plot.pth
    ```
 
    ```bach
-   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O best_cell_detection.pth
+   wget https://www.dropbox.com/scl/fi/weijpwjbo19ucjmkbsh4b/best_cell_detection.pth?rlkey=6vuebzlez79uq53p4o3mc5voe&dl=0 -O best_cell_detection.pth
    ```
 
    - Quantized Weights:
 
    ```bach
-   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O detect_table_plot_quantized_model.pth
+   wget https://www.dropbox.com/scl/fi/g4sw2hf0flzf7vr3k2d64/detect_table_plot_quantized_model.pth?rlkey=ke37t2cabejkitsgmzrux883p&dl=0 -O detect_table_plot_quantized_model.pth
    ```
 
    ```bach
-   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O best_cell_detection_quantized_model.pth
+   wget https://www.dropbox.com/scl/fi/vd9q1j3mxhja2kloyq8bm/best_cell_detection_quantized_model.pth?rlkey=qwnowcjv20mvuuw2jf2mk0xar&dl=0 -O best_cell_detection_quantized_model.pth
    ```
 
 ### Contributing
