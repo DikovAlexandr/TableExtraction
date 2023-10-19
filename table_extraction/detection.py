@@ -42,7 +42,7 @@ def get_tables_maskrcnn(low_quality_gray_images: List[np.ndarray],
         # Get prediction
         mode = "table_plot"
         directory = os.path.dirname(os.path.realpath(__file__))
-        weights = os.path.join(directory, "maskrcnn", "weights", "detect_table_plot.pth")
+        weights = os.path.join(directory, "maskrcnn", "weights", "detect_table_plot_quantized_model.pth")
         _, boxes, labels = inference.get_bboxes_of_objects(image, weights, threshold = 0.8, mode=mode)
 
         # logging.debug(f"Image {num + 1} - Boxes: {boxes} [amount {len(boxes)}], Labels: {labels} [amount {len(labels)}]")
@@ -77,7 +77,7 @@ def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, in
         mode = "cells"
         # weights = os.path.join(os.getcwd(), "maskrcnn", "weights", "cell_detection.pth")
         directory = os.path.dirname(os.path.realpath(__file__))
-        weights = os.path.join(directory, "maskrcnn", "weights", "best_cell_detection.pth")
+        weights = os.path.join(directory, "maskrcnn", "weights", "best_cell_detection_quantized_model.pth")
         _, boxes, labels = inference.get_bboxes_of_objects(image, weights, threshold=0.6, mode=mode)
 
         # logging.debug(f"Image {num + 1} - Boxes: {boxes} [amount {len(boxes)}], Labels: {labels} [amount {len(labels)}]")

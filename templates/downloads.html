@@ -1,7 +1,14 @@
-<ul>
-    {% for file in files %}
-      <li>
-        <a href="{{ url_for('download_file', filename=file) }}">Скачать {{ file }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Results</title>
+</head>
+<body>
+    <h1>Download Results</h1>
+    <ul>
+        {% for file in files %}
+            <li><a href="{{ url_for('download_file', filename=file) }}">{{ file }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

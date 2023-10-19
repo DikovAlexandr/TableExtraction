@@ -10,9 +10,7 @@ The project utilizes a combination of computer vision, deep learning and natural
 
 2. **Mask R-CNN**: The Mask R-CNN architecture is employed for table segmentation and pixel-wise object detection. This deep learning model allows us to precisely delineate table boundaries.
 
-3. **Tesseract OCR**: The Tesseract OCR engine is used for text recognition within the detected tables. It provides support for multiple languages and is well-suited for recognizing text in various formats.
-
-4. **EasyOCR**: EasyOCR is another OCR library that is employed for recognizing text in the tables.
+3. **EasyOCR**: The EasyOCR engine is used for text recognition within the detected tables. It provides support for multiple languages and is well-suited for recognizing text in various formats.
 
 ## Project Architecture
 
@@ -20,21 +18,19 @@ The project follows a modular architecture to enable easy extensibility and main
 
 1. **Table Detection**: This module focuses on using OpenCV and Mask R-CNN to detect table regions within documents and images.
 
-2. **Table Recognition**: The table recognition module employs Tesseract OCR and EasyOCR to extract text from the detected tables.
+2. **Table Recognition**: The table recognition module employs EasyOCR to extract text from the detected tables.
 
-3. **Data Post-Processing**: The extracted tabular data is processed with NumPy and Pandas to organize and present it in a structured format. such as yaml and json.
+3. **Data Post-Processing**: The extracted tabular data to organize and present it in a structured format, such as yaml or json.
 
-4. **User Interface**: A simple user interface is provided for interacting with the system, allowing users to upload documents and visualize the detected tables along with recognized text. TableExtraction.ipynb is recommend for more customizable code interaction.
-
+4. **User web-interface**: A simple user web-interface is provided for interacting with the system, allowing users to upload documents and download detected tables along with recognized text. But TableExtraction.ipynb is recommend for more customizable code interaction.
 
 # Step by Step Detection
-To help with debugging and understanding the model, there is notebook 
-([TableExtraction.ipynb](TableExtraction/TableExtraction.ipynb)), which provide many visualizations and allow you to step through the model to check the output at each point, change settings and see possible code errors that occur. Here are some examples:
+To help with debugging and understanding the model, there is notebook ([TableExtraction.ipynb](TableExtraction/TableExtraction.ipynb)), which provide many visualizations and allow you to step through the model to check the output at each point, change settings and see possible code errors that occur. Here are some examples:
 
 ## 1. File selection
 First, select the PDF file which you want to extract tabular information from. Specify its address in the code:
 ```python
-extractor.extract_from_file('PUT/YOUR/FILE/ADDRESS/HERE.pdf')
+extractor.extract('PUT/YOUR/FILE/ADDRESS/HERE.pdf')
 ```
 ![](assets/page.png)
 
@@ -53,27 +49,35 @@ After finding the lines, you need to understand how the cells are located relati
 
 ![](assets/nodes.png)
 
-## 5. Cell division
+## 5.Cells detection
+Once we've established the table's structure, the next step is to detect individual cells within it.
+ - **Mask R-CNN**: We can use Mask R-CNN to directly recognize and segment individual cells within the table.
+ - **Empirically**: Alternatively, we can rely on empirical rules based on the table's structure and layout to infer cell positions.
+
+![](assets/cells.png)
+
+## 6. Separating headers and records
 Next, the cells are divided into those that store the names of the columns and data-storing cells.
+ - **Mask R-CNN**: We can employ Mask R-CNN to recognize header and data cells.
+ - **Empirically**: Based on prior knowledge about table formatting, we can use heuristics and logic to distinguish header cells from data cells.
 
 ![](assets/header.png)
 ![](assets/records.png)
 
-## 6. Result
+## 7. Result
 As a result of the algorithm, a file with the yaml extension will appear in the results folder, in which the structured data of each of the pages of the document will be stored
 
-## Installation (Are not up to date!)
+## Installation
 
-<!-- Отдельно склонировать репозиторий mask rcnn
-проблема с numpy
-pip3 install -r requirements.txt
-прописал в requirements версии
-надо установить Build tools for visual studio 
-microsoft visual c++ 14.0 is required get it with build tools for visual studio https //visualstudio.microsoft.com/downloads/ 
-сначала установил питон python=3.7
-отдельно mrcnn==0.2
-pip3 install -r requirements.txt --user
-https://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick_on-windows -->
+Before using this code, make sure you have the following prerequisites installed:
+
+- Microsoft Visual C++ 14.0: You can download it from [here](https://visualstudio.microsoft.com/downloads/).
+
+- ImageMagick: Install ImageMagick by following the guidelines provided [here](https://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick_on-windows).
+
+- Poppler: Ensure you have Poppler version 23.07.0 or newer installed.You can download it from [here](https://github.com/oschwartz10612/poppler-windows/releases/). You can either place it in **C:\Program Files** or modify the path in the **preprocessing.py** file as needed.
+
+Now you can get started, follow these steps:
 
 1. Clone this repository
    ```bash
@@ -81,27 +85,47 @@ https://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick_on-win
    ```
 2. Create a virtual environment (recommended) to isolate project dependencies
    ```bash
-   conda create --name table_extraction python=3.7
+   # On Unix/Linux
+   python3 -m venv table_extraction_venv
+
+   # On Windows
+   python -m venv table_extraction_venv
    ```
    ```bash
-   conda activate table_extraction
+   # On Unix/Linux
+   source table_extraction_venv/bin/activate
+
+   # On Windows
+   table_extraction_venv\Scripts\activate
    ```
 3. Install the required dependencies from the requirements.txt file and setup.py:
    ```bash
    pip3 install -r requirements.txt
    ```
-   ```bash
-   python3 setup.py install
+4. Downloading Pre-trained Model Weights:
+
+   Before running the code, you have the option to download pre-trained model weights. You can choose between two versions: full precision (original) weights and quantized weights for memory efficiency.
+
+   - Full Precision Weights:
+
+   ```bach
+   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O detect_table_plot.pth
    ```
-4. Download model weights: **https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5?rlkey=0k4qp26cq4aviy3xk20512ji0&dl=0**
-5. For correct operation of mrcnn with tensorflow2, replace the files model.py and utils.py in the mrcnn folder in your environment. To do this, use the files [model.py](mrcnn_fix/model.py) and [utils.py](mrcnn_fix/utils.py)
-from folder [mrcnn_fix](mrcnn_fix) and replace them with the files of the same name located at the address that looks like: **C:\Users\User\conda\envs\table_extraction\Lib\site-packages\mrcnn**
-6. You need to install a poppler
-Link to the version I used: **https://github.com/oschwartz10612/poppler-windows/releases/**
-You need to download the zip file and unpack it into the **Program Files** folder to get the address:
-**C:\Program Files\poppler-23.07.0**
-7. You also need to install Tesseract OCR with the **Russian** language pack.
-There is an installation guide with links to files: **https://codetoprosper.com/tesseract-ocr-for-windows**
+
+   ```bach
+   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O best_cell_detection.pth
+   ```
+
+   - Quantized Weights:
+
+   ```bach
+   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O detect_table_plot_quantized_model.pth
+   ```
+
+   ```bach
+   wget https://www.dropbox.com/scl/fi/fn5re0opdtnbxnb0gr2hr/mask_rcnn_tablebank_cfg.h5 -O best_cell_detection_quantized_model.pth
+   ```
+
 ### Contributing
 
 If you have any ideas, bug reports, or feature requests, feel free to open an issue or submit a pull request on the project's repository.

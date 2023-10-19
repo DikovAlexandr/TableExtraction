@@ -1,4 +1,5 @@
 import os
+import io
 import json
 import yaml
 import numpy as np
@@ -92,6 +93,7 @@ def save(results: List[dict], format: str, origin_file_path: str) -> None:
                 with open(output_file, 'w', encoding='utf-8') as yaml_file:
                     yaml.dump(structure, yaml_file,
                                 default_flow_style=False, allow_unicode=True)
+            return True
 
         if format == 'json':
             for num, structure in enumerate(results):
@@ -100,3 +102,5 @@ def save(results: List[dict], format: str, origin_file_path: str) -> None:
                 with open(output_file, 'w', encoding='utf-8') as json_file:
                     json.dump(structure, json_file,
                                 ensure_ascii=False, indent=4)
+            return True
+    else: False

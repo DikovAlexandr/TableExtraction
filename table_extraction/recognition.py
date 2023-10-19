@@ -5,29 +5,21 @@ import easyocr
 import numpy as np
 from typing import List, Tuple
 import matplotlib.pyplot as plt
+from concurrent.futures import ThreadPoolExecutor
 
-def image_to_text_easyocr(image: np.ndarray) -> str:
+def image_to_text_easyocr(image: np.ndarray, reader) -> str:
     """
     Perform text recognition on an image using EasyOCR.
 
     Args:
         image (np.ndarray): Input image as a NumPy array for text recognition.
-
+        reader : Reader for text recognition (EasyOCR)
     Returns:
         str: Recognized text from the input image.
-    """
-    # Check if a GPU is available
-    gpu_available = torch.cuda.is_available()
-
-     # Initialize the EasyOCR reader with language settings and model storage directories
-    reader = easyocr.Reader(['en', 'ru'], 
-        model_storage_directory='easy_ocr/model',
-        user_network_directory='easy_ocr/user_network',
-        gpu=gpu_available,
-        verbose=False)
-    
+    """    
     # Perform text recognition on the input image
     result = reader.readtext(image)
+    # result = reader.recognize(image)
 
     # Extract and concatenate the recognized text from the result
     text = ''
@@ -92,6 +84,25 @@ def filter_tables_by_classification(tables: List[np.ndarray]) -> List[np.ndarray
             filtered_tables.append(table)
     return filtered_tables
 
+def process_cell(image, rectangle):
+    x1, y1, x2, y2 = rectangle
+
+    # Crop images at cell borders
+    # margin = 5
+    # cell_image = image[max(0, y1 - margin):min(image.shape[1], y2 + margin), max(0, x1 - margin):min(image.shape[0], x2 + margin)]
+    cell_image = image[min(y1, y2):max(y1, y2), min(x1, x2):max(x1, x2)]
+
+    # Check if cell_image is not empty
+    if not cell_image.any():
+        return (x1, y1, x2, y2), ""
+
+    # Text recognition
+    text = image_to_text_easyocr(cell_image)
+    # print(text)
+
+    # Store the recognized text in the cell_text dictionary with rectangle coordinates as the key
+    return (x1, y1, x2, y2), text
+
 
 def osr_detection(tables: List[np.ndarray], tables_rectangles: List[List[Tuple[Tuple[int, int], Tuple[int, int]]]]) -> List[dict]:
     """
@@ -109,9 +120,22 @@ def osr_detection(tables: List[np.ndarray], tables_rectangles: List[List[Tuple[T
     # Initialize a list to store cell text for each table
     tables_cell_text = []
 
+    # Check if a GPU is available
+    gpu_available = torch.cuda.is_available()
+
+    # Initialize the EasyOCR reader with language settings and model storage directories
+    reader = easyocr.Reader(['en', 'ru'], 
+        model_storage_directory='easy_ocr/model',
+        user_network_directory='easy_ocr/user_network',
+        gpu=gpu_available,
+        verbose=False)
+
     # Loop through each table and its corresponding rectangles
     for num, image in enumerate(tables):
         cell_text = {}
+
+        # with ThreadPoolExecutor() as executor:
+        #     cell_text = dict(executor.map(process_cell, [image for i in range(len(tables_rectangles[num]))], tables_rectangles[num]))
 
         # Iterate through rectangles within the current table
         for rectangle in tables_rectangles[num]:
@@ -123,7 +147,7 @@ def osr_detection(tables: List[np.ndarray], tables_rectangles: List[List[Tuple[T
             cell_image = image[min(y1, y2):max(y1, y2), min(x1, x2):max(x1, x2)]
 
             # Text recognition
-            text = image_to_text_easyocr(cell_image)
+            text = image_to_text_easyocr(cell_image, reader)
             # print(text)
 
             # Store the recognized text in the cell_text dictionary with rectangle coordinates as the key
