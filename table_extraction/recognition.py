@@ -3,8 +3,10 @@ import cv2
 import torch
 import easyocr
 import numpy as np
+import multiprocessing as mp
 from typing import List, Tuple
 import matplotlib.pyplot as plt
+from concurrent.futures import ProcessPoolExecutor
 from concurrent.futures import ThreadPoolExecutor
 
 def image_to_text_easyocr(image: np.ndarray, reader) -> str:
@@ -84,7 +86,7 @@ def filter_tables_by_classification(tables: List[np.ndarray]) -> List[np.ndarray
             filtered_tables.append(table)
     return filtered_tables
 
-def process_cell(image, rectangle):
+def process_cell(image, rectangle, reader):
     x1, y1, x2, y2 = rectangle
 
     # Crop images at cell borders
@@ -97,7 +99,7 @@ def process_cell(image, rectangle):
         return (x1, y1, x2, y2), ""
 
     # Text recognition
-    text = image_to_text_easyocr(cell_image)
+    text = image_to_text_easyocr(cell_image, reader)
     # print(text)
 
     # Store the recognized text in the cell_text dictionary with rectangle coordinates as the key
@@ -136,6 +138,9 @@ def osr_detection(tables: List[np.ndarray], tables_rectangles: List[List[Tuple[T
 
         # with ThreadPoolExecutor() as executor:
         #     cell_text = dict(executor.map(process_cell, [image for i in range(len(tables_rectangles[num]))], tables_rectangles[num]))
+
+        # with ProcessPoolExecutor(max_workers=mp.cpu_count()) as executor:
+        #     cell_text = dict(executor.map(process_cell, [image for i in range(len(tables_rectangles[num]))], tables_rectangles[num], [reader for i in range(len(tables_rectangles[num]))]))
 
         # Iterate through rectangles within the current table
         for rectangle in tables_rectangles[num]:
