@@ -25,7 +25,7 @@ The project follows a modular architecture to enable easy extensibility and main
 4. **User web-interface**: A simple user web-interface is provided for interacting with the system, allowing users to upload documents and download detected tables along with recognized text. But TableExtraction.ipynb is recommend for more customizable code interaction.
 
 # Step by Step Detection
-To help with debugging and understanding the model, there is notebook ([TableExtraction.ipynb](TableExtraction/TableExtraction.ipynb)), which provide many visualizations and allow you to step through the model to check the output at each point, change settings and see possible code errors that occur. Here are some examples:
+To help with debugging and understanding the model, there is notebook [TableExtraction.ipynb](TableExtraction/TableExtraction.ipynb), which provide many visualizations and allow you to step through the model to check the output at each point, change settings and see possible code errors that occur. Here are some examples:
 
 ## 1. File selection
 First, select the PDF file which you want to extract tabular information from. Specify its address in the code:
@@ -75,7 +75,7 @@ Before using this code, make sure you have the following prerequisites installed
 
 - ImageMagick: Install ImageMagick by following the guidelines provided [here](https://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick_on-windows).
 
-- Poppler: Ensure you have Poppler version 23.07.0 or newer installed.You can download it from [here](https://github.com/oschwartz10612/poppler-windows/releases/). You can either place it in **C:\Program Files** or modify the path in the **preprocessing.py** file as needed.
+- Poppler: Ensure you have Poppler version 23.07.0 or newer installed.You can download it from [here](https://github.com/oschwartz10612/poppler-windows/releases/) (only Windows) or from [here](https://poppler.freedesktop.org/). You can either place it in **C:\Program Files** on Windows, **/usr/bin** on Linux or modify the path in the [preprocessing.py](table_extraction/preprocessing.py) file as needed.
 
 Now you can get started, follow these steps:
 

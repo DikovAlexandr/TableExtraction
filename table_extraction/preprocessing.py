@@ -1,5 +1,6 @@
 import os
 import cv2
+import platform
 import numpy as np
 from typing import List, Tuple
 import matplotlib.pyplot as plt
@@ -16,9 +17,12 @@ def bytes_file_to_array(pdf_bytes: bytes, dpi: int = 300) -> List[np.ndarray]:
     Returns:
         List[np.ndarray]: A list of NumPy arrays representing images.
     """
+    system = platform.system()
+
     poppler_path = os.path.join(os.environ.get(
         'PROGRAMFILES', 'C:\\Program Files'), 'poppler-23.07.0', 'Library', 'bin')
-    images = convert_from_bytes(
+    
+    images = convert_from_bytes(    
         pdf_bytes, dpi=dpi, poppler_path=poppler_path)
     return [np.array(image) for image in images]
 

@@ -18,9 +18,9 @@ def image_to_text_easyocr(image: np.ndarray, reader) -> str:
         reader : Reader for text recognition (EasyOCR)
     Returns:
         str: Recognized text from the input image.
-    """    
+    """
     # Perform text recognition on the input image
-    result = reader.readtext(image)
+    result = reader.readtext(image, batch_size=16)
     # result = reader.recognize(image)
 
     # Extract and concatenate the recognized text from the result
@@ -105,6 +105,15 @@ def process_cell(image, rectangle, reader):
     # Store the recognized text in the cell_text dictionary with rectangle coordinates as the key
     return (x1, y1, x2, y2), text
 
+def initial_reader(_):
+    gpu_available = torch.cuda.is_available()
+    return easyocr.Reader(
+        ['en', 'ru'], 
+        model_storage_directory='easy_ocr/model',
+        user_network_directory='easy_ocr/user_network',
+        gpu=gpu_available,
+        verbose=False
+    )
 
 def osr_detection(tables: List[np.ndarray], tables_rectangles: List[List[Tuple[Tuple[int, int], Tuple[int, int]]]]) -> List[dict]:
     """
@@ -126,11 +135,14 @@ def osr_detection(tables: List[np.ndarray], tables_rectangles: List[List[Tuple[T
     gpu_available = torch.cuda.is_available()
 
     # Initialize the EasyOCR reader with language settings and model storage directories
-    reader = easyocr.Reader(['en', 'ru'], 
-        model_storage_directory='easy_ocr/model',
-        user_network_directory='easy_ocr/user_network',
-        gpu=gpu_available,
-        verbose=False)
+    num_workers = mp.cpu_count()
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        readers = list(executor.map(initial_reader, range(num_workers)))
+    # reader = easyocr.Reader(['en', 'ru'], 
+    #     model_storage_directory='easy_ocr/model',
+    #     user_network_directory='easy_ocr/user_network',
+    #     gpu=gpu_available,
+    #     verbose=False)
 
     # Loop through each table and its corresponding rectangles
     for num, image in enumerate(tables):
@@ -142,21 +154,28 @@ def osr_detection(tables: List[np.ndarray], tables_rectangles: List[List[Tuple[T
         # with ProcessPoolExecutor(max_workers=mp.cpu_count()) as executor:
         #     cell_text = dict(executor.map(process_cell, [image for i in range(len(tables_rectangles[num]))], tables_rectangles[num], [reader for i in range(len(tables_rectangles[num]))]))
 
-        # Iterate through rectangles within the current table
-        for rectangle in tables_rectangles[num]:
-            x1, y1, x2, y2 = rectangle
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            cell_text = dict(executor.map(process_cell, tables_rectangles[num], readers))
 
-            # Crop images at cell borders
-            # margin = 5
-            # cell_image = image[max(0, y1 - margin):min(image.shape[1], y2 + margin), max(0, x1 - margin):min(image.shape[0], x2 + margin)]
-            cell_image = image[min(y1, y2):max(y1, y2), min(x1, x2):max(x1, x2)]
+        # # Iterate through rectangles within the current table
+        # for rectangle in tables_rectangles[num]:
+        #     x1, y1, x2, y2 = rectangle
 
-            # Text recognition
-            text = image_to_text_easyocr(cell_image, reader)
-            # print(text)
+        #     # Crop images at cell borders
+        #     # margin = 5
+        #     # cell_image = image[max(0, y1 - margin):min(image.shape[1], y2 + margin), max(0, x1 - margin):min(image.shape[0], x2 + margin)]
+        #     cell_image = image[min(y1, y2):max(y1, y2), min(x1, x2):max(x1, x2)]
 
-            # Store the recognized text in the cell_text dictionary with rectangle coordinates as the key
-            cell_text[(x1, y1, x2, y2)] = text
+        #     image_filename = f"cell_{abs(x1-x2)}_{abs(y1-y2)}.jpg"
+        #     image_path = os.path.join(os.getcwd(), image_filename)
+        #     cv2.imwrite(image_path, cell_image)
+
+        #     # Text recognition
+        #     text = image_to_text_easyocr(cell_image, reader)
+        #     # print(text)
+
+        #     # Store the recognized text in the cell_text dictionary with rectangle coordinates as the key
+        #     cell_text[(x1, y1, x2, y2)] = text
 
         # Append the cell text dictionary for the current table to the result list
         tables_cell_text.append(cell_text)
