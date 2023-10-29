@@ -15,7 +15,6 @@ from maskrcnn import inference
 #     format='%(asctime)s - %(levelname)s - %(message)s'
 # )
 
-TESSERACT_CONFIG = r'--oem 1 --psm 1 -l rus'
 
 def get_tables_maskrcnn(low_quality_gray_images: List[np.ndarray], 
                          low_dpi: int, 
@@ -56,7 +55,8 @@ def get_tables_maskrcnn(low_quality_gray_images: List[np.ndarray],
                 croped_high_quality_gray_image = high_quality_gray_images[num][y1*factor:y2*factor, x1*factor:x2*factor]
                 tables_high.append(croped_high_quality_gray_image)
     return tables_high, tables_low
-    
+
+
 def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, int, int]]]:
     """
     Extracts cells from tables using Mask R-CNN.
@@ -94,7 +94,8 @@ def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, in
 
         # 
         aligned_cells = []
-        epsilon = (image.shape[0] + image.shape[1]) / (2*30)
+        # epsilon = (image.shape[0] + image.shape[1]) / (2*20)
+        epsilon = 10
 
         for cell in cells:
             x1, y1, x2, y2 = cell
@@ -105,7 +106,10 @@ def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, in
 
             aligned_cells.append((aligned_x1, aligned_y1, aligned_x2, aligned_y2))
         #
-        
+
+        cells = sorted(cells, key=lambda x: (x[0], x[1]))
+        # cells = sorted(aligned_cells, key=lambda x: (x[0], x[1]))
+
         all_cells.append(cells)
     return(all_cells)
 
@@ -124,6 +128,7 @@ def visualize_table_images(tables: List[np.ndarray]) -> None:
         plt.imshow(cv2.cvtColor(table, cv2.COLOR_BGR2RGB))
         plt.axis('off')
         plt.show()
+
 
 def get_lines_Hough(tables: List[np.ndarray]) -> List[Tuple[List[Tuple[int, int, int, int]], List[Tuple[int, int, int, int]]]]:
     """
@@ -210,6 +215,7 @@ def get_lines_Hough(tables: List[np.ndarray]) -> List[Tuple[List[Tuple[int, int,
             tables_lines.append(([], []))
     return tables_lines
 
+
 def visualize_tables_lines(tables: List[np.ndarray], 
                            tables_lines: List[Tuple[List[Tuple[int, int, int, int]], List[Tuple[int, int, int, int]]]]) -> None:
     """
@@ -239,6 +245,7 @@ def visualize_tables_lines(tables: List[np.ndarray],
         plt.imshow(cv2.cvtColor(copy_image, cv2.COLOR_BGR2RGB))
         plt.axis('off')
         plt.show()
+
 
 def get_nodes(tables: List[np.ndarray], 
               tables_lines: List[Tuple[List[Tuple[int, int, int, int]], List[Tuple[int, int, int, int]]]]) -> List[List[Tuple[int, int]]]:
@@ -356,6 +363,7 @@ def get_nodes(tables: List[np.ndarray],
         all_tables_nodes.append(nodes_sorted_xy)
     return all_tables_nodes
 
+
 def visualize_tables_nodes(tables: List[np.ndarray], 
                            tables_nodes: List[List[Tuple[int, int]]]) -> None:
     """
@@ -381,10 +389,11 @@ def visualize_tables_nodes(tables: List[np.ndarray],
         plt.axis('off')
         plt.show()
 
-def get_rectangles(tables: List[np.ndarray], 
+
+def get_cells(tables: List[np.ndarray], 
                    tables_nodes: List[List[Tuple[int, int]]]) -> List[List[Tuple[int, int, int, int]]]:
     """
-    Extracts rectangles within tables based on nodes.
+    Extracts cells within tables based on nodes.
 
     Args:
         tables (List[np.ndarray]): List of table images.
@@ -392,11 +401,11 @@ def get_rectangles(tables: List[np.ndarray],
 
     Returns:
         List[List[Tuple[Tuple[int, int], Tuple[int, int]]]]:
-        - List of rectangles for each table image. Each rectangle is represented as a tuple of two points.
+        - List of cells for each table image. Each cell is represented as a tuple of two points.
           The first point is the top-left corner, and the second point is the bottom-right corner.
     """
-    # Initialize a list to store the rectangles for each table
-    tables_rectangles = []
+    # Initialize a list to store the cells for each table
+    tables_cells = []
 
     # Loop through each table image and its corresponding nodes
     for num, image in enumerate(tables):
@@ -404,8 +413,8 @@ def get_rectangles(tables: List[np.ndarray],
         epsilon = (height + width) * 0.01
         tables_nodes = tables_nodes[num]
         
-        # Create a list of rectangles
-        rectangles = []
+        # Create a list of cells
+        cells = []
         for i in range(len(tables_nodes) - 1):
             current_node = tables_nodes[i]
             if tables_nodes[i + 1][1] == current_node[1]:
@@ -423,40 +432,42 @@ def get_rectangles(tables: List[np.ndarray],
                     for node in tables_nodes:
                         if abs(node[0] - opposite_node[0]) <= epsilon and abs(node[1] - opposite_node[1]) <= epsilon:
 
-                            # Build a rectangle based on the found nodes
-                            rectangle = (
+                            # Build a cell based on the found nodes
+                            cell = (
                                 current_node[0], current_node[1], opposite_node[0], opposite_node[1])
-                            rectangles.append(rectangle)
+                            cells.append(cell)
                             flag = False
                             break
         
-        rectangles = [(x1, height-y1, x2, height-y2) for x1, y1, x2, y2 in rectangles]
-        rectangles = sorted(rectangles, key=lambda x: (x[1], x[0]))
-        tables_rectangles.append(rectangles)
-    return tables_rectangles
+        cells = [(x1, height-y1, x2, height-y2) for x1, y1, x2, y2 in cells]
+        cells = sorted(cells, key=lambda x: (x[1], x[0]))
+        tables_cells.append(cells)
+    return tables_cells
 
-def visualize_rectangles(tables: List[np.ndarray],
-                         tables_rectangles: List[List[Tuple[int, int, int, int]]]) -> None:
+
+def visualize_cells(tables: List[np.ndarray],
+                         tables_cells: List[List[Tuple[int, int, int, int]]]) -> None:
     """
-    Visualizes a list of rectangles on tables.
+    Visualizes a list of cells on tables.
 
     Args:
-        rectangles (List[List[Tuple[int, int, int, int]]]): A list of lists of rectangle coordinates.
+        tables (List[np.ndarray]): List of table images.
+        tables_cells (List[List[Tuple[int, int, int, int]]]): A list of lists of cells coordinates.
             Each inner list contains tuples (x1, y1, x2, y2) representing the top-left and bottom-right
-            corners of rectangles on images.
+            corners of cell on images.
 
     Returns:
         None
     """
-    for image, rectangles in zip(tables, tables_rectangles):
+    for image, cells in zip(tables, tables_cells):
         copy_image = image.copy()
-        for rectangle in rectangles:
-            x1, y1, x2, y2 = rectangle
+        for cell in cells:
+            x1, y1, x2, y2 = cell
 
-            # Draw rectangles on the image
+            # Draw cell on the image
             cv2.rectangle(copy_image, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
-        # Display the image with rectangles
+        # Display the image with cells
         plt.imshow(copy_image)
         plt.axis('off')
         plt.show()

@@ -6,6 +6,7 @@ from typing import List, Tuple
 import matplotlib.pyplot as plt
 from pdf2image import convert_from_path, convert_from_bytes 
 
+
 def bytes_file_to_array(pdf_bytes: bytes, dpi: int = 300) -> List[np.ndarray]:
     """
     Converts a PDF file to a list of NumPy arrays representing images.
@@ -26,6 +27,7 @@ def bytes_file_to_array(pdf_bytes: bytes, dpi: int = 300) -> List[np.ndarray]:
         pdf_bytes, dpi=dpi, poppler_path=poppler_path)
     return [np.array(image) for image in images]
 
+
 def pdf_file_to_array(file_path: str, dpi: int = 300) -> List[np.ndarray]:
     """
     Converts a PDF file to a list of NumPy arrays representing images.
@@ -43,6 +45,7 @@ def pdf_file_to_array(file_path: str, dpi: int = 300) -> List[np.ndarray]:
         file_path, dpi=dpi, poppler_path=poppler_path)
     return [np.array(image) for image in images]
 
+
 def image_file_to_array(file_path: str) -> List[np.ndarray]:
     """
     Reads an image file and converts it to a list of NumPy arrays.
@@ -57,6 +60,7 @@ def image_file_to_array(file_path: str) -> List[np.ndarray]:
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image_array = np.array(image_rgb)
     return [image_array]
+
 
 def visualize_images(images: List[np.ndarray]) -> None:
     """
@@ -73,6 +77,7 @@ def visualize_images(images: List[np.ndarray]) -> None:
         plt.axis('off')
         plt.show()
 
+
 def grayzation(images_array: List[np.ndarray]) -> List[np.ndarray]:
     """
     Converts a list of color images to grayscale.
@@ -87,6 +92,7 @@ def grayzation(images_array: List[np.ndarray]) -> List[np.ndarray]:
     for image in images_array:
         gray_images.append(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY))
     return gray_images
+
 
 def binarization(images_array: List[np.ndarray]) -> List[np.ndarray]:
     """

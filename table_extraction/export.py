@@ -1,22 +1,24 @@
 import os
 import io
+import copy
 import json
 import yaml
 import numpy as np
 from typing import List, Tuple
 
 from builder import (
-    split_into_headers_and_records,
-    split_into_headers_and_records_maskrcnn,
-    visualize_headers_and_records_cells,
-    create_cell_dict,
-    build_structure,
     split_records,
-    fill_structure
+    fill_structure,
+    build_structure,
+    create_cell_dict,
+    extract_record_text,
+    split_into_headers_and_records,
+    visualize_headers_and_records_cells,
+    split_into_headers_and_records_maskrcnn,
 )
 
 
-def make_yaml_file(tables: List[np.ndarray], 
+def make_serialized_structure(tables: List[np.ndarray], 
                    tables_rectangles: List[List[Tuple[Tuple[int, int], Tuple[int, int]]]], 
                    ocr_detected_text: List[dict]) -> List[dict]:
     """
@@ -34,15 +36,15 @@ def make_yaml_file(tables: List[np.ndarray],
             The structure is built based on the detected headers and records in the tables.
     """
     results = []
-    for num, image in enumerate(tables):
+    for num, table_image in enumerate(tables):
         structure = []
         if tables_rectangles[num]:
-            # header_cells, record_cells, columns_for_records, records = split_into_headers_and_records_maskrcnn(image, tables_rectangles[num])
-            header_cells, record_cells, columns_for_records, records = split_into_headers_and_records(tables_rectangles[num])
+            # header_cells, record_cells, columns_for_records, records = split_into_headers_and_records_maskrcnn(table_image, tables_rectangles[num])
+            header_cells, record_cells, records_list = split_into_headers_and_records(tables_rectangles[num])
 
             if header_cells and record_cells:
-                # visualize_headers_and_records_cells(image, header_cells, 'header')
-                # visualize_headers_and_records_cells(image, record_cells, 'record')
+                # visualize_headers_and_records_cells(table_image, header_cells, 'header')
+                # visualize_headers_and_records_cells(table_image, record_cells, 'record')
 
                 header_cell_dict = create_cell_dict(header_cells)
                 rectangle_text_dict = ocr_detected_text[num]
@@ -51,24 +53,26 @@ def make_yaml_file(tables: List[np.ndarray],
                     structure.append(build_structure(cell, 
                                                      rectangle_text_dict, 
                                                      header_cell_dict))
-                    
-                # 
-                # print(structure)
-                # 
-
-                data_list = list(split_records(record_cells, 
-                                               columns_for_records))
                 
-                # 
-                # print(data_list)
-                # 
+                records_text = []
+                for record in records_list:
+                    records_text.append(extract_record_text(record, rectangle_text_dict))
 
-                for i in range(records):
-                    fill_structure(
-                        structure, data_list[i], rectangle_text_dict)
+                print(records_text)
 
-        results.append(structure)
+                result_structure = []
+
+                for num, text in enumerate(records_text):
+                    copy_structure = copy.deepcopy(structure)
+
+                    print(copy_structure)
+                    print(text)
+
+                    result_structure.append(fill_structure(copy_structure, text))
+
+        results.append(result_structure)
     return results
+
 
 def save(results: List[dict], format: str, origin_file_path: str) -> None:
     """
@@ -90,17 +94,29 @@ def save(results: List[dict], format: str, origin_file_path: str) -> None:
             for num, structure in enumerate(results):
                 file_name = os.path.basename(origin_file_path)
                 output_file = f"results/{os.path.splitext(file_name)[0]}_table_{num}.yaml"
-                with open(output_file, 'w', encoding='utf-8') as yaml_file:
-                    yaml.dump(structure, yaml_file,
-                                default_flow_style=False, allow_unicode=True)
+
+                if os.path.exists(output_file):
+                    with open(output_file, 'w', encoding='utf-8'):
+                        pass
+
+                for record in structure:
+                    with open(output_file, 'a', encoding='utf-8') as yaml_file:
+                        yaml.dump(record, yaml_file,
+                                    default_flow_style=False, allow_unicode=True)
             return True
 
         if format == 'json':
             for num, structure in enumerate(results):
                 file_name = os.path.basename(origin_file_path)
                 output_file = f"results/{os.path.splitext(file_name)[0]}_table_{num}.json"
-                with open(output_file, 'w', encoding='utf-8') as json_file:
-                    json.dump(structure, json_file,
-                                ensure_ascii=False, indent=4)
+
+                if os.path.exists(output_file):
+                    with open(output_file, 'w', encoding='utf-8'):
+                        pass
+
+                for record in structure:
+                    with open(output_file, 'a', encoding='utf-8') as json_file:
+                        json.dump(structure, json_file,
+                                    ensure_ascii=False, indent=4)
             return True
     else: False

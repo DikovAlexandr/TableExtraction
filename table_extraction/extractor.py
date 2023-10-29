@@ -3,18 +3,22 @@ from preprocessing import (grayzation,
                            pdf_file_to_array,
                            bytes_file_to_array,
                            visualize_images)
+
 from detection import (get_nodes,
-                       get_rectangles,
+                       get_cells,
+                       visualize_cells,
                        get_lines_Hough,
                        get_cells_maskrcnn, 
                        get_tables_maskrcnn,
-                       visualize_table_images, 
-                       visualize_rectangles)
-from builder import split_into_headers_and_records_maskrcnn
-from export import make_yaml_file, save
+                       visualize_table_images)
+
 from recognition import osr_detection
+from export import make_serialized_structure, save
+from builder import split_into_headers_and_records_maskrcnn
+
 import warnings
 warnings.filterwarnings("ignore")
+
 
 def extract(file, filename):
     low_dpi = 50
@@ -50,8 +54,8 @@ def extract(file, filename):
 
     # tables_lines = get_lines_Hough(tables)
     # tables_nodes = get_nodes(tables, tables_lines)
-    # tables_cells = get_rectangles(tables, tables_nodes)
-    # visualize_rectangles(tables, tables_cells)
+    # tables_cells = get_cells(tables, tables_nodes)
+    # visualize_cells(tables, tables_cells)
 
     # split_into_headers_and_records_maskrcnn(tables[0], tables_cells[0])
 
@@ -61,6 +65,6 @@ def extract(file, filename):
             print(f"Error in cell text detection: {str(e)}")
             return False
 
-    results = make_yaml_file(tables, tables_cells, table_cell_text)
+    results = make_serialized_structure(tables, tables_cells, table_cell_text)
     result_path = save(results, 'yaml', filename)    
     return result_path
