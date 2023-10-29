@@ -58,15 +58,15 @@ def make_serialized_structure(tables: List[np.ndarray],
                 for record in records_list:
                     records_text.append(extract_record_text(record, rectangle_text_dict))
 
-                print(records_text)
+                # print(records_text)
 
                 result_structure = []
 
                 for num, text in enumerate(records_text):
                     copy_structure = copy.deepcopy(structure)
 
-                    print(copy_structure)
-                    print(text)
+                    # print(copy_structure)
+                    # print(text)
 
                     result_structure.append(fill_structure(copy_structure, text))
 

@@ -222,10 +222,6 @@ def osr_detection(tables: List[np.ndarray],
             # cell_image = image[max(0, y1 - margin):min(image.shape[1], y2 + margin), max(0, x1 - margin):min(image.shape[0], x2 + margin)]
             cell_image = image[min(y1, y2):max(y1, y2), min(x1, x2):max(x1, x2)]
 
-            image_filename = f"cell_{abs(x1-x2)}_{abs(y1-y2)}.jpg"
-            image_path = os.path.join(os.getcwd(), image_filename)
-            cv2.imwrite(image_path, cell_image)
-
             # Text recognition
             text = remove_hyphenated_words(image_to_text_easyocr(cell_image, reader))
             # print(text)

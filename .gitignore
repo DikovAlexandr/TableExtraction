@@ -2,5 +2,5 @@
 *.pth
 /venv
 /table_extraction/maskrcnn/input
-/table_extraction/input
+/table_extraction/input/cells
 /table_extraction/input/cache

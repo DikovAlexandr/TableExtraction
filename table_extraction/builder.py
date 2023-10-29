@@ -71,13 +71,15 @@ def split_into_headers_and_records(rectangles: List[Tuple[int, int, int, int]]) 
     """
 
     cell_counts, _ = group_cells(rectangles)  # Dictionary to store cell counts for each y
-    print("cell_counts", cell_counts)
+    # print("cell_counts", cell_counts)
 
     # Find the y where the number of cells changes
     sorted_cell_counts = sorted(cell_counts.items(), reverse=True)
-    print("sorted_cell_counts", sorted_cell_counts)
+    # print("sorted_cell_counts", sorted_cell_counts)
+    
     # Number of cells of each record line
     num_cells = None
+    change_y = None
     epsilon = 20
     records = 1
 
@@ -90,13 +92,16 @@ def split_into_headers_and_records(rectangles: List[Tuple[int, int, int, int]]) 
         else:
             records += 1
 
-    print("change_y", change_y)
+    if change_y is None:
+        change_y = sorted_cell_counts[-1][0]
+
+    # print("change_y", change_y)
 
     record_cells = [(x1, y1, x2, y2)
                     for x1, y1, x2, y2 in rectangles if y1 >= change_y + epsilon]
     
     _, records_list = group_cells(record_cells)
-    print("records_list", records_list)
+    # print("records_list", records_list)
     
     record_cells = sorted(record_cells, key=lambda x: (x[1], x[0]))
 
