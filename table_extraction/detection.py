@@ -6,6 +6,7 @@ import numpy as np
 from typing import List, Tuple
 import matplotlib.pyplot as plt
 from scipy.spatial import KDTree
+from transformer.core import TableRecognizer
 
 from maskrcnn import inference
 
@@ -14,6 +15,46 @@ from maskrcnn import inference
 #     level=logging.DEBUG,
 #     format='%(asctime)s - %(levelname)s - %(message)s'
 # )
+
+def get_tables_detr(low_quality_gray_images: List[np.ndarray], 
+                         low_dpi: int, 
+                         high_quality_gray_images: List[np.ndarray], 
+                         high_dpi: int) -> Tuple[List[np.ndarray], List[np.ndarray]]:
+    """
+    Extracts tables from low and high-quality grayscale images using DETR.
+
+    Args:
+        low_quality_gray_images (List[np.ndarray]): List of low-quality grayscale images.
+        low_dpi (int): DPI of the low-quality images.
+        high_quality_gray_images (List[np.ndarray]): List of high-quality grayscale images.
+        high_dpi (int): DPI of the high-quality images.
+
+    Returns:
+        Tuple[List[np.ndarray], List[np.ndarray]]:
+        - List of extracted high-quality table images.
+        - List of extracted low-quality table images.
+    """
+    tables_low = []
+    tables_high =[]
+    thresh = 0.9
+
+    for num, image in enumerate(low_quality_gray_images):
+        # Get prediction
+        mode = "detection"
+        directory = os.path.dirname(os.path.realpath(__file__))
+        model = TableRecognizer(checkpoint_path=os.path.join(directory, 'transformer', 'TATR-v1.1-All-msft.pth'), mode=mode) # pubtables1m_detection_detr_r18
+        results = model.predict(image_path=image)
+
+        for score, label, (xmin, ymin, xmax, ymax)  in zip(results['scores'].tolist(), results['labels'].tolist(), results['boxes'].tolist()):
+            if score < thresh:
+                    continue
+            if label == "1":
+                croped_low_quality_gray_image = low_quality_gray_images[num][ymin-5:ymax+5, xmin-5:xmax+5]
+                tables_low.append(croped_low_quality_gray_image)
+                factor = int(high_dpi/low_dpi)
+                croped_high_quality_gray_image = high_quality_gray_images[num][ymin*factor:ymax*factor, xmin*factor:xmax*factor]
+                tables_high.append(croped_high_quality_gray_image)
+    return tables_high, tables_low
 
 
 def get_tables_maskrcnn(low_quality_gray_images: List[np.ndarray], 
@@ -39,7 +80,7 @@ def get_tables_maskrcnn(low_quality_gray_images: List[np.ndarray],
 
     for num, image in enumerate(low_quality_gray_images):
         # Get prediction
-        mode = "table_plot"
+        mode = "detection"
         directory = os.path.dirname(os.path.realpath(__file__))
         weights = os.path.join(directory, "maskrcnn", "weights", "detect_table_plot.pth")
         _, boxes, labels = inference.get_bboxes_of_objects(image, weights, threshold = 0.8, mode=mode)
@@ -57,7 +98,35 @@ def get_tables_maskrcnn(low_quality_gray_images: List[np.ndarray],
     return tables_high, tables_low
 
 
-def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, int, int]]]:
+def get_cells_detr(tables: List[np.ndarray]) -> List[Tuple[int, int, int, int]]:
+    """
+    Extracts cells from tables using Mask R-CNN.
+
+    Args:
+        tables (List[np.ndarray]): List of table images.
+
+    Returns:
+        List[List[Tuple[int, int, int, int]]]: List of cell bounding boxes for each table.
+    """
+    cells = []
+    thresh = 0.9
+
+    for num, image in enumerate(tables):
+        # Get prediction
+        mode = "structure"
+        directory = os.path.dirname(os.path.realpath(__file__))
+        model = TableRecognizer(checkpoint_path=os.path.join(directory, 'transformer', 'TATR-v1.1-All-msft.pth'), mode=mode)
+        results = model.predict(image_path=image)
+
+
+        for score, label, (xmin, ymin, xmax, ymax)  in zip(results['scores'].tolist(), results['labels'].tolist(), results['boxes'].tolist()):
+            if score < thresh:
+                    continue
+            cells.append((xmin, ymin, xmax, ymax))
+    return cells
+
+
+def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[Tuple[int, int, int, int]]:
     """
     Extracts cells from tables using Mask R-CNN.
 
@@ -74,8 +143,7 @@ def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, in
         # copy_image = image.copy()
 
         # Get prediction
-        mode = "cells"
-        # weights = os.path.join(os.getcwd(), "maskrcnn", "weights", "cell_detection.pth")
+        mode = "structure"
         directory = os.path.dirname(os.path.realpath(__file__))
         weights = os.path.join(directory, "maskrcnn", "weights", "best_cell_detection.pth")
         _, boxes, labels = inference.get_bboxes_of_objects(image, weights, threshold=0.6, mode=mode)
@@ -85,14 +153,12 @@ def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, in
         for box, _ in zip(boxes, labels):
             [x1, y1], [x2, y2] = box
             cells.append((x1, y1, x2, y2))
-
             # cv2.rectangle(copy_image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
 
         # plt.imshow(cv2.cvtColor(copy_image, cv2.COLOR_BGR2RGB))
         # plt.axis('off')
         # plt.show()
 
-        # 
         aligned_cells = []
         # epsilon = (image.shape[0] + image.shape[1]) / (2*20)
         epsilon = 10
@@ -111,7 +177,7 @@ def get_cells_maskrcnn(tables: List[np.ndarray]) -> List[List[Tuple[int, int, in
         # cells = sorted(aligned_cells, key=lambda x: (x[0], x[1]))
 
         all_cells.append(cells)
-    return(all_cells)
+    return all_cells
 
 
 def visualize_table_images(tables: List[np.ndarray]) -> None:

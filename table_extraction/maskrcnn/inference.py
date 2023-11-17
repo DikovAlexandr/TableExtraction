@@ -16,9 +16,12 @@ def get_bboxes_of_objects(image, weights, threshold, mode):
         pretrained=False, num_classes=91
     )
 
-    if mode == 'cells':
+    if mode == 'detection':
         class_names = CELLS_CATEGORY_NAMES
+    elif mode == 'structure':
+        class_names = INSTANCE_CATEGORY_NAMES
     else:
+        print("Invalid mode")
         class_names = INSTANCE_CATEGORY_NAMES
 
     model.roi_heads.box_predictor.cls_score = nn.Linear(in_features=1024, out_features=len(class_names), bias=True)
