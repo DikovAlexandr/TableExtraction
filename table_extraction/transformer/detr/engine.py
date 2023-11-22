@@ -9,9 +9,12 @@ from typing import Iterable
 
 import torch
 
-import util.misc as utils
-from datasets.coco_eval import CocoEvaluator
-from datasets.panoptic_eval import PanopticEvaluator
+sys.path.append(os.path.join('transformer', 'detr'))
+sys.path.append(os.path.join('transformer', 'src'))
+
+import transformer.detr.util.misc as utils
+from transformer.detr.datasets.coco_eval import CocoEvaluator
+from transformer.detr.datasets.panoptic_eval import PanopticEvaluator
 
 
 def train_one_epoch(

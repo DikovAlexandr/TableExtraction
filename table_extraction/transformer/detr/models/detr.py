@@ -6,8 +6,8 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from util import box_ops
-from util.misc import (
+from transformer.detr.util import box_ops
+from transformer.detr.util.misc import (
     NestedTensor,
     nested_tensor_from_tensor_list,
     accuracy,

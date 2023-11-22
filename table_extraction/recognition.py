@@ -221,9 +221,11 @@ def osr_detection(tables: List[np.ndarray],
             # margin = 5
             # cell_image = image[max(0, y1 - margin):min(image.shape[1], y2 + margin), max(0, x1 - margin):min(image.shape[0], x2 + margin)]
             cell_image = image[min(y1, y2):max(y1, y2), min(x1, x2):max(x1, x2)]
-
+            
             # Text recognition
-            text = remove_hyphenated_words(image_to_text_easyocr(cell_image, reader))
+            text = ''
+            if isinstance(cell_image, np.ndarray) and cell_image.size > 0:
+                text = remove_hyphenated_words(image_to_text_easyocr(cell_image, reader))
             # print(text)
 
             # Store the recognized text in the cell_text dictionary with cell coordinates as the key

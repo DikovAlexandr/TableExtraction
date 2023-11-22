@@ -7,6 +7,18 @@ from . import class_names
 np.random.seed(2023)
 
 def get_outputs(image, model, threshold, mode):
+    """
+    Retrieves the outputs of a given image through a model based on the specified mode and threshold.
+    Parameters:
+        image (Tensor): The input image to be processed.
+        model (Model): The model to be used for processing the image.
+        threshold (float): The threshold value for filtering the scores.
+        mode (str): The mode specifying the category names to be used.
+    Returns:
+        masks (ndarray): The masks of the objects above the threshold.
+        boxes (list): The bounding boxes of the objects above the threshold.
+        labels (list): The labels of the objects above the threshold.
+    """
     if mode == 'cells':
         coco_names = class_names.CELLS_CATEGORY_NAMES
     else:
@@ -37,7 +49,20 @@ def get_outputs(image, model, threshold, mode):
     return masks, boxes, labels    
 
 def draw_segmentation_map(image, masks, boxes, labels, args, mode):
-    if mode == 'cells':
+    """
+    Generate the segmentation map for the given image using the provided masks, boxes, labels, and other arguments.
+    Parameters:
+    - image: The original PIL image to generate the segmentation map for.
+    - masks: A list of binary masks, each representing the segmentation mask for an object in the image.
+    - boxes: A list of bounding boxes, each representing the coordinates of an object in the image.
+    - labels: A list of labels, each representing the class label of an object in the image.
+    - args: An object containing additional arguments and options for the function.
+    - mode: A string indicating the mode of operation ('cells' or 'instance').
+    Returns:
+    - image: The original image with the segmentation map and bounding boxes overlaid.
+    Note: This function assumes that the class_names module has been imported and provides the necessary category names.
+    """
+    if mode == 'structure':
         coco_names = class_names.CELLS_CATEGORY_NAMES
     else:
         coco_names = class_names.INSTANCE_CATEGORY_NAMES
@@ -52,7 +77,7 @@ def draw_segmentation_map(image, masks, boxes, labels, args, mode):
     # Convert from RGN to OpenCV BGR format
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     for i in range(len(masks)):
-        # Apply a randon color mask to each object
+        # Apply a random color mask to each object
         color = COLORS[coco_names.index(labels[i])]
         if masks[i].any() == True:
             red_map = np.zeros_like(masks[i]).astype(np.uint8)

@@ -8,9 +8,20 @@ from . import infer_utils
 # from infer_utils import get_outputs
 from torchvision.transforms import transforms as transforms
 from .class_names import INSTANCE_CATEGORY_NAMES, CELLS_CATEGORY_NAMES
-# from class_names import INSTANCE_CATEGORY_NAMES as class_names
 
 def get_bboxes_of_objects(image, weights, threshold, mode):
+    """
+    Generates a function comment for the given function body.
+    Args:
+        image (PIL.Image.Image): The input image.
+        weights (str): The path to the weights file.
+        threshold (float): The confidence threshold for object detection.
+        mode (str): The mode of operation ('detection' or 'structure').
+    Returns:
+        masks (List[Tensor]): A list of masks for each detected object.
+        boxes (List[Tensor]): A list of bounding boxes for each detected object.
+        labels (List[int]): A list of class labels for each detected object.
+    """
     # Initialize the model
     model = torchvision.models.detection.maskrcnn_resnet50_fpn_v2(
         pretrained=False, num_classes=91

@@ -7,8 +7,15 @@ from torchvision import ops
 from torchvision.transforms import functional as F, InterpolationMode, transforms as T
 
 
-# Function to flip COCO person keypoints horizontally
 def _flip_coco_person_keypoints(kps, width):
+    """
+    Flips the COCO person keypoints horizontally.
+    Args:
+        kps (ndarray): Array of shape (N, 17, 3) representing the COCO person keypoints.
+        width (int): The width of the image.
+    Returns:
+        ndarray: Array of shape (N, 17, 3) representing the flipped COCO person keypoints.
+    """
     flip_inds = [0, 2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15]
     flipped_data = kps[:, flip_inds]
     flipped_data[..., 0] = width - flipped_data[..., 0]
@@ -286,11 +293,10 @@ class RandomPhotometricDistort(nn.Module):
         return image, target
 
 
-# Class for random scaling of images and bounding boxes
 class ScaleJitter(nn.Module):
     """Randomly resizes the image and its bounding boxes  within the specified scale range.
-    The class implements the Scale Jitter augmentation as described in the paper
-    `"Simple Copy-Paste is a Strong Data Augmentation Method for Instance Segmentation" <https://arxiv.org/abs/2012.07177>`_.
+    The class implements the Scale Jitter augmentation as described in the paper:
+    "Simple Copy-Paste is a Strong Data Augmentation Method for Instance Segmentation" <https://arxiv.org/abs/2012.07177>.
 
     Args:
         target_size (tuple of ints): The target size for the transform provided in (height, weight) format.
@@ -470,12 +476,24 @@ def _copy_paste(
     blending: bool = True,
     resize_interpolation: F.InterpolationMode = F.InterpolationMode.BILINEAR,
 ) -> Tuple[torch.Tensor, Dict[str, Tensor]]:
-
+    """
+    Applies copy-paste augmentation to an image and its corresponding target.
+    Args:
+        image (torch.Tensor): The input image tensor.
+        target (Dict[str, Tensor]): The target dictionary containing masks, boxes, labels, and optional keys.
+        paste_image (torch.Tensor): The image tensor to be pasted.
+        paste_target (Dict[str, Tensor]): The target dictionary of the paste image containing masks, boxes, and labels.
+        blending (bool, optional): Whether to apply blending when pasting the image. Defaults to True.
+        resize_interpolation (F.InterpolationMode, optional): The interpolation mode for resizing the paste image.
+            Defaults to F.InterpolationMode.BILINEAR.
+    Returns:
+        Tuple[torch.Tensor, Dict[str, Tensor]]: A tuple containing the augmented image tensor and the updated target dictionary.
+    """
     # Random paste targets selection:
     num_masks = len(paste_target["masks"])
 
     if num_masks < 1:
-        # Such degerante case with num_masks=0 can happen with LSJ
+        # Such degenerate case with num_masks=0 can happen with LSJ
         # Let's just return (image, target)
         return image, target
 

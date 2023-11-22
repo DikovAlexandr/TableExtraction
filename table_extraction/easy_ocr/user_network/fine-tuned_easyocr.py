@@ -1,7 +1,6 @@
 import torch.nn as nn
 
 class BidirectionalLSTM(nn.Module):
-
     def __init__(self, input_size, hidden_size, output_size):
         super(BidirectionalLSTM, self).__init__()
         self.rnn = nn.LSTM(input_size, hidden_size, bidirectional=True, batch_first=True)
@@ -12,16 +11,15 @@ class BidirectionalLSTM(nn.Module):
         input : visual feature [batch_size x T x input_size]
         output : contextual feature [batch_size x T x output_size]
         """
-        try: # multi gpu needs this
+        try: # Multi gpu needs this
             self.rnn.flatten_parameters()
-        except: # quantization doesn't work with this 
+        except: # Quantization doesn't work with this 
             pass
-        recurrent, _ = self.rnn(input)  # batch_size x T x input_size -> batch_size x T x (2*hidden_size)
-        output = self.linear(recurrent)  # batch_size x T x output_size
+        recurrent, _ = self.rnn(input)  # Batch_size x T x input_size -> batch_size x T x (2*hidden_size)
+        output = self.linear(recurrent)  # Batch_size x T x output_size
         return output
 
 class VGG_FeatureExtractor(nn.Module):
-
     def __init__(self, input_channel, output_channel=256):
         super(VGG_FeatureExtractor, self).__init__()
         self.output_channel = [int(output_channel / 8), int(output_channel / 4),
@@ -45,7 +43,6 @@ class VGG_FeatureExtractor(nn.Module):
         return self.ConvNet(input)
 
 class Model(nn.Module):
-
     def __init__(self, input_channel, output_channel, hidden_size, num_class):
         super(Model, self).__init__()
         """ FeatureExtraction """

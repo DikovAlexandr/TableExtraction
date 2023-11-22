@@ -34,15 +34,29 @@ from transforms import SimpleCopyPaste
 from class_names import INSTANCE_CATEGORY_NAMES as class_names
 from custom_utils import save_mAP
 
-
-# Function for copy-paste augmentation
 def copypaste_collate_fn(batch):
+    """
+    Function for copy-paste augmentation.
+    Args:
+        batch (list): A list augmentations in batch.
+    Returns:
+        The result of SimpleCopyPaste.
+    """
     copypaste = SimpleCopyPaste(blending=True, resize_interpolation=InterpolationMode.BILINEAR)
     return copypaste(*utils.collate_fn(batch))
 
 
-# Function to get the dataset based on name, image_set, transform, and data_path
 def get_dataset(name, image_set, transform, data_path):
+    """
+    Retrieves a dataset based on the given name, image set, transformation, and data path.
+    Args:
+        name (str): The name of the dataset to retrieve.
+        image_set (str): The image set to use for the dataset.
+        transform (callable): A function or transform to apply to the dataset.
+        data_path (str): The path to the dataset.
+    Returns:
+        tuple: A tuple containing the dataset and the number of classes in the dataset.
+    """
     paths = {"coco": (data_path, get_coco, 91), "coco_kp": (data_path, get_coco_kp, 2)}
     p, ds_fn, num_classes = paths[name]
 
@@ -50,8 +64,15 @@ def get_dataset(name, image_set, transform, data_path):
     return ds, num_classes
 
 
-# Function to get the appropriate data transformation based on training mode and arguments
 def get_transform(train, args):
+    """
+    Function to get the appropriate data transformation based on training mode and arguments.
+    Args:
+        train (bool): A flag indicating whether the transform is for training or not.
+        args (Namespace): An object containing the command line arguments.
+    Returns:
+        presets.DetectionPresetTrain or presets.DetectionPresetEval or callable.
+    """
     if train:
         return presets.DetectionPresetTrain(data_augmentation=args.data_augmentation)
     elif args.weights and args.test_only:
@@ -64,6 +85,13 @@ def get_transform(train, args):
 
 # Function to get the works settings 
 def get_args_parser(add_help=True):
+    """
+    Creates an argument parser for command line arguments.
+    Args:
+        add_help (bool, optional): Whether to include the help option in the parser. Defaults to True.
+    Returns:
+        argparse.ArgumentParser: The argument parser object.
+    """
     import argparse
 
     parser = argparse.ArgumentParser(description="PyTorch Detection Training", add_help=add_help)
